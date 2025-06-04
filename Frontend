@@ -1,0 +1,46 @@
+// frontend/saferpayClient.js
+export async function createPayment(amount, currency, description) {
+  const response = await fetch("/api/saferpay/create-payment", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ amount, currency, description }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error || "Erreur lors de la création du paiement");
+  }
+
+  const data = await response.json();
+  return data.redirectUrl;
+}
+import React, { useState } from "react";
+import { createPayment } from "./saferpayClient";
+
+export default function PaymentButton() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handlePay = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const url = await createPayment(10, "CHF", "Test Payment");
+      window.location.href = url;
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <button style={{ background: "black", color: "white" }} onClick={handlePay} disabled={loading}>
+        {loading ? "Processing..." : "Payer 10 CHF"}
+      </button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+    </div>
+  );
+}

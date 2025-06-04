@@ -1,0 +1,61 @@
+// backend/routes/saferpay.mjs
+import express from "express";
+import axios from "axios";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const router = express.Router();
+
+router.post("/create-payment", async (req, res) => {
+  const { amount, currency, description } = req.body;
+
+  try {
+    const response = await axios.post(
+      "https://test.saferpay.com/api/Payment/v1/PaymentPage/Initialize",
+      {
+        RequestHeader: {
+          SpecVersion: "1.0",
+          CustomerId: process.env.SAFERPAY_CUSTOMER_ID,
+          RequestId: `req-${Date.now()}`,
+          RetryIndicator: 0,
+          ClientInfo: { ShopInfo: "NetManagementOnline" },
+        },
+        TerminalId: process.env.SAFERPAY_TERMINAL_ID,
+        Payment: {
+          Amount: { Value: Math.round(amount * 100), CurrencyCode: currency },
+          OrderId: `order-${Date.now()}`,
+          Description: description,
+        },
+        ReturnUrl: { Url: "https://netmanagement.online/success" },
+      },
+      {
+        auth: {
+          username: process.env.SAFERPAY_USERNAME,
+          password: process.env.SAFERPAY_PASSWORD,
+        },
+      }
+    );
+
+    res.json({ redirectUrl: response.data.RedirectUrl });
+  } catch (error) {
+    console.error("Saferpay Init Error:", error.response?.data || error.message);
+    res.status(500).json({ error: "Erreur Saferpay" });
+  }
+});
+
+export default router;
+
+// backend/server.mjs
+import express from "express";
+import saferpayRouter from "./routes/saferpay.mjs";
+
+const app = express();
+app.use(express.json());
+
+app.use("/api/saferpay", saferpayRouter);
+
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
+});
+
