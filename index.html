@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE HTML>
 <!--
 	Hyperspace by HTML5 UP
@@ -11,200 +12,451 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head><!DOCTYPE html>
+	<html lang="en">
+	<head>
+	  <meta charset="UTF-8" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <title>Vanilla Web App</title>
+	  <style>
+		body {
+		  font-family: sans-serif;
+		  background-color: #f9fafb;
+		  margin: 0;
+		  padding: 2rem;
+		}
+		.grid {
+		  display: grid;
+		  gap: 1.5rem;
+		}
+		@media (min-width: 768px) {
+		  .grid {
+			grid-template-columns: repeat(3, 1fr);
+		  }
+		}
+		.card {
+		  background: white;
+		  border-radius: 1rem;
+		  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+		  padding: 1.5rem;
+		}
+		h2, h3 {
+		  font-size: 1.25rem;
+		  font-weight: bold;
+		  margin-bottom: 1rem;
+		}
+		label {
+		  font-size: 0.875rem;
+		  font-weight: 600;
+		  display: block;
+		  margin-top: 1rem;
+		}
+		input, select {
+		  width: 100%;
+		  padding: 0.5rem;
+		  margin-top: 0.25rem;
+		  border: 1px solid #ccc;
+		  border-radius: 0.375rem;
+		}
+		button {
+		  margin-top: 1rem;
+		  padding: 0.5rem 1rem;
+		  background-color: black;
+		  color: white;
+		  border: none;
+		  border-radius: 0.375rem;
+		  cursor: pointer;
+		  transition: background 0.2s ease-in-out;
+		}
+		button:hover {
+		  background-color: #333;
+		}
+		table {
+		  width: 100%;
+		  border-collapse: collapse;
+		  margin-top: 1rem;
+		}
+		th, td {
+		  border: 1px solid #ccc;
+		  padding: 0.5rem;
+		  text-align: left;
+		}
+		.response {
+		  background: #f0f0f0;
+		  border-radius: 0.5rem;
+		  padding: 1rem;
+		  margin-top: 1rem;
+		}
+		.error {
+		  color: red;
+		  font-size: 0.875rem;
+		  display: none;
+		}
+		.loading {
+		  color: #007bff;
+		  font-size: 1rem;
+		  display: none;
+		}
+	  </style>
 	</head>
+	<body>
+	
+	  <div class="grid">
+	
+		<!-- Outgoing Payment (Xero) -->
+		<div class="card">
+		  <h2>Outgoing Payment (Xero)</h2>
+		  <label>Xero Contact ID</label>
+		  <input id="xeroContactId" type="text" placeholder="12345678-aaaa-bbbb-cccc-ddddeeeeffff"/>
+		  <label>IBAN</label>
+		  <input id="xeroIban" type="text" placeholder="Your IBAN"/>
+		  <label>Amount</label>
+		  <input id="xeroAmount" type="text" placeholder="100.00"/>
+		  <label>Description</label>
+		  <input id="xeroDescription" type="text" placeholder="Supplier payment"/>
+		  <button onclick="makeXeroPayment()">Make Xero Payment</button>
+		  <p id="xeroError" class="error">Error message</p>
+		  <p id="xeroLoading" class="loading">Processing...</p>
+		</div>
+	
+		<!-- Crypto Payment to OKX -->
+		<div class="card">
+		  <h2>Crypto Payment to OKX</h2>
+		  <label>Cryptocurrency</label>
+		  <select id="cryptoCurrency">
+			<option>Bitcoin (BTC)</option>
+			<option>Ethereum (ETH)</option>
+			<option>Tether (USDT)</option>
+		  </select>
+		  <label>Amount</label>
+		  <input id="cryptoAmount" type="text" placeholder="100.00"/>
+		  <label>IBAN</label>
+		  <input id="cryptoIban" type="text" placeholder="Your IBAN"/>
+		  <button onclick="sendCryptoPayment()">Send Crypto Payment</button>
+		  <p id="cryptoError" class="error">Error message</p>
+		  <p id="cryptoLoading" class="loading">Processing...</p>
+		</div>
+	
+		<!-- GPT-4 Interaction -->
+		<div class="card">
+		  <h2>Interact with GPT-4</h2>
+		  <label>Ask GPT-4 a question</label>
+		  <input id="gptQuestion" type="text" placeholder="Your question here"/>
+		  <button onclick="askGpt()">Ask Question</button>
+		  <p id="gptError" class="error">Error message</p>
+		  <div id="gptResponse" class="response">
+			<h3>GPT-4 Response:</h3>
+			<p>Answer will appear here.</p>
+		  </div>
+		  <p id="gptLoading" class="loading">Processing...</p>
+		</div>
+	
+		<!-- Payment History -->
+		<div class="card" style="grid-column: span 3;">
+		  <h3>Payment History</h3>
+		  <table>
+			<thead>
+			  <tr>
+				<th>Type</th>
+				<th>Crypto / Xero</th>
+				<th>Amount</th>
+				<th>Status</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+				<td>Xero</td>
+				<td>Xero Payment</td>
+				<td>100.00</td>
+				<td>Completed</td>
+			  </tr>
+			  <tr>
+				<td>OKX</td>
+				<td>ETH</td>
+				<td>250.00</td>
+				<td>Pending</td>
+			  </tr>
+			</tbody>
+		  </table>
+		</div>
+	
+	  </div>
+	
+	  <script>
+		// Function to simulate the API request to Xero
+		async function makeXeroPayment() {
+		  const xeroContactId = document.getElementById('xeroContactId').value;
+		  const xeroIban = document.getElementById('xeroIban').value;
+		  const xeroAmount = document.getElementById('xeroAmount').value;
+		  const xeroDescription = document.getElementById('xeroDescription').value;
+	
+		  document.getElementById('xeroLoading').style.display = 'block';
+		  document.getElementById('xeroError').style.display = 'none';
+	
+		  // Simulating network call to Xero
+		  try {
+			// Call your Xero API here
+			// Example: const response = await axios.post('/xero/payment', { xeroContactId, xeroIban, xeroAmount, xeroDescription });
+			
+			// Simulate success response
+			setTimeout(() => {
+			  document.getElementById('xeroLoading').style.display = 'none';
+			  alert('Xero payment successful!');
+			}, 2000);
+		  } catch (error) {
+			document.getElementById('xeroLoading').style.display = 'none';
+			document.getElementById('xeroError').style.display = 'block';
+		  }
+		}
+	
+		// Function to simulate the crypto payment to OKX
+		async function sendCryptoPayment() {
+		  const cryptoCurrency = document.getElementById('cryptoCurrency').value;
+		  const cryptoAmount = document.getElementById('cryptoAmount').value;
+		  const cryptoIban = document.getElementById('cryptoIban').value;
+	
+		  document.getElementById('cryptoLoading').style.display = 'block';
+		  document.getElementById('cryptoError').style.display = 'none';
+	
+		  // Simulating network call to OKX
+		  try {
+			// Call your OKX API here
+			// Example: const response = await axios.post('/okx/payment', { cryptoCurrency, cryptoAmount, cryptoIban });
+	
+			// Simulate success response
+			setTimeout(() => {
+			  document.getElementById('cryptoLoading').style.display = 'none';
+			  alert('Crypto payment successful!');
+			}, 2000);
+		  } catch (error) {
+			document.getElementById('cryptoLoading').style.display = 'none';
+			document.getElementById('cryptoError').style.display = 'block';
+		  }
+		}
+	
+		// Function to simulate GPT-4 question and answer
+		async function askGpt() {
+		  const question = document.getElementById('gptQuestion').value;
+	
+		  document.getElementById('gptLoading').style.display = 'block';
+		  document.getElementById('gptError').style.display = 'none';
+		  document.getElementById('gptResponse').style.display = 'none';
+	
+		  try {
+			// Simulating API call to GPT-4
+			// Example: const response = await axios.post('/gpt/ask', { question });
+	
+			// Simulate success response
+			setTimeout(() => {
+			  document.getElementById('gptLoading').style.display = 'none';
+			  document.getElementById('gptResponse').style.display = 'block';
+			  document.getElementById('gptResponse').innerHTML = `
+				<h3>GPT-4 Response:</h3>
+				<p>Here is the simulated response to your question: ${question}</p>
+			  `;
+			}, 2000);
+		  } catch (error) {
+			document.getElementById('gptLoading').style.display = 'none';
+			document.getElementById('gptError').style.display = 'block';
+		  }
+		}
+	  </script>
+	
+	</body>
+	</html>
 	<body class="is-preload">
 
 		<!-- Sidebar -->
-			<section id="sidebar">
-				<div class="inner">
-					<nav>
-						<ul>
-							<li><a href="#intro">Welcome</a></li>
-							<li><a href="#one">Who we are</a></li>
-							<li><a href="#two">What we do</a></li>
-							<li><a href="#three">Get in touch</a></li>
-						</ul>
-					</nav>
-				</div>
-			</section>
-
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Intro -->
-					<section id="intro" class="wrapper style1 fullscreen fade-up">
-						<div class="inner">
-							<h1>Hyperspace</h1>
-							<p>Just another fine responsive site template designed by <a href="http://html5up.net">HTML5 UP</a><br />
-							and released for free under the <a href="http://html5up.net/license">Creative Commons</a>.</p>
-							<ul class="actions">
-								<li><a href="#one" class="button scrolly">Learn more</a></li>
-							</ul>
-						</div>
-					</section>
-
-				<!-- One -->
-					<section id="one" class="wrapper style2 spotlights">
-						<section>
-							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
-							<div class="content">
-								<div class="inner">
-									<h2>Sed ipsum dolor</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
-									<ul class="actions">
-										<li><a href="generic.html" class="button">Learn more</a></li>
-									</ul>
-								</div>
-							</div>
-						</section>
-						<section>
-							<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
-							<div class="content">
-								<div class="inner">
-									<h2>Feugiat consequat</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
-									<ul class="actions">
-										<li><a href="generic.html" class="button">Learn more</a></li>
-									</ul>
-								</div>
-							</div>
-						</section>
-						<section>
-							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
-							<div class="content">
-								<div class="inner">
-									<h2>Ultricies aliquam</h2>
-									<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p>
-									<ul class="actions">
-										<li><a href="generic.html" class="button">Learn more</a></li>
-									</ul>
-								</div>
-							</div>
-						</section>
-					</section>
-
-				<!-- Two -->
-					<section id="two" class="wrapper style3 fade-up">
-						<div class="inner">
-							<h2>What we do</h2>
-							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
-							<div class="features">
-								<section>
-									<span class="icon solid major fa-code"></span>
-									<h3>Lorem ipsum amet</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-									<span class="icon solid major fa-lock"></span>
-									<h3>Aliquam sed nullam</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-									<span class="icon solid major fa-cog"></span>
-									<h3>Sed erat ullam corper</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-									<span class="icon solid major fa-desktop"></span>
-									<h3>Veroeros quis lorem</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-									<span class="icon solid major fa-link"></span>
-									<h3>Urna quis bibendum</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-								<section>
-									<span class="icon major fa-gem"></span>
-									<h3>Aliquam urna dapibus</h3>
-									<p>Phasellus convallis elit id ullam corper amet et pulvinar. Duis aliquam turpis mauris, sed ultricies erat dapibus.</p>
-								</section>
-							</div>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
-							</ul>
-						</div>
-					</section>
-
-				<!-- Three -->
-					<section id="three" class="wrapper style1 fade-up">
-						<div class="inner">
-							<h2>Get in touch</h2>
-							<p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
-							<div class="split style1">
-								<section>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="name">Name</label>
-												<input type="text" name="name" id="name" />
-											</div>
-											<div class="field half">
-												<label for="email">Email</label>
-												<input type="text" name="email" id="email" />
-											</div>
-											<div class="field">
-												<label for="message">Message</label>
-												<textarea name="message" id="message" rows="5"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><a href="" class="button submit">Send Message</a></li>
-										</ul>
-									</form>
-								</section>
-								<section>
-									<ul class="contact">
-										<li>
-											<h3>Address</h3>
-											<span>12345 Somewhere Road #654<br />
-											Nashville, TN 00000-0000<br />
-											USA</span>
-										</li>
-										<li>
-											<h3>Email</h3>
-											<a href="#">user@untitled.tld</a>
-										</li>
-										<li>
-											<h3>Phone</h3>
-											<span>(000) 000-0000</span>
-										</li>
-										<li>
-											<h3>Social</h3>
-											<ul class="icons">
-												<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-												<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-												<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-												<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-												<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-											</ul>
-										</li>
-									</ul>
-								</section>
-							</div>
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Footer -->
-			<footer id="footer" class="wrapper style1-alt">
-				<div class="inner">
-					<ul class="menu">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+		<section id="sidebar">
+			<div class="inner">
+				<nav>
+					<ul>
+						<li><a href="#intro">Welcome</a></li>
+						<li><a href="#one">Who we are</a></li>
+						<li><a href="#two">What we do</a></li>
+						<li><a href="#three">Get in touch</a></li>
 					</ul>
-				</div>
-			</footer>
+				</nav>
+			</div>
+		</section>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+	<!-- Wrapper -->
+		<div id="wrapper">
 
-	</body>#!/bin/bash
-	echo "$RANDOM"  # Supported in bash. No warnings.
+			<!-- Intro -->
+				<section id="intro" class="wrapper style1 fullscreen fade-up">
+					<div class="inner">
+						<h1>Hyperspace</h1>
+						<p>Just another fine responsive site template designed by <a href="http://html5up.net">HTML5 UP</a><br />
+						and released for free under the <a href="http://html5up.net/license">Creative Commons</a>.</p>
+						<ul class="actions">
+							<li><a href="#one" class="button scrolly">Learn more</a></li>
+						</ul>
+					</div>
+				</section>
+
+			<!-- One -->
+				<section id="one" class="wrapper style2 spotlights">
+					<section>
+						<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+						<div class="content">
+							<div class="inner">
+								<h1>Payer avec Stripe</h1>
+								 <button id="checkout-button">Procéder au paiement</button>
+
+								<ul class="actions">
+									<li><a href="generic.html" class="button">Learn more</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+						<div class="content">
+							<div class="inner">
+								<h2>Move to Stripe</h2>
+								<p>When users access our service, Okta handles secure authentication. It ensures every user is verified, with precise control over permissions and access levels. This layer of security means businesses can manage users confidently, whether it’s employees, accountants, or partners.</p>
+								<ul class="actions">
+									<li><a href="generic.html" class="button">Learn more</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section>
+						<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+						<div class="content">
+							<div class="inner">
+								<h2>Get on true</h2>
+								<p>Through our Xero Partner 2.0 integration, we offer full-featured access to Xero’s ecosystem. That includes user role management, billing synchronization, and real-time financial data processing. The ‘point twenty’ framework is central to managing accounts and users efficiently, and it’s been working very smoothly for our partners.</p>
+								<ul class="actions">
+									<li><a href="generic.html" class="button">Learn more</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+				</section>
+
+			<!-- Two -->
+				<section id="two" class="wrapper style3 fade-up">
+					<div class="inner">
+						<h2>What we do</h2>
+						<p>Then, we bring in GPT-4. This is where intelligence takes over. We use GPT-4 to analyze financial data, assist users in understanding reports, and automate complex workflows. For example, it can summarize cash flow trends, help write financial commentary, or even support decision-making with predictive insights. It’s like having an intelligent assistant built into your financial system.</p>
+						<div class="features">
+							<section>
+								<span class="icon solid major fa-code"></span>
+								<h3>How our algorithm work's</h3>
+								<p>Beyond automation and integration, GPT-4 brings advanced intelligence into daily operations. It doesn’t just assist—it actively helps users understand and act on their financial data. Whether a client wants to know where their money is going, forecast future trends, or analyze monthly expenses, GPT-4 can guide them clearly and naturally.</p>
+							</section>
+							<section>
+								<span class="icon solid major fa-lock"></span>
+								<h3>Xero and JAX</h3>
+								<p>Now, when we combine that with JAX—our analytics and visualization engine—it becomes even more powerful. JAX turns raw financial data into clear, interactive dashboards. It makes finance visual, fast, and accessible. GPT-4 then adds context, interpreting the visuals, spotting patterns, and even suggesting next steps. So instead of just seeing a chart, a user might get a helpful insight like: ‘Spending on marketing increased twenty percent this month—consider reviewing campaign performance.</p>
+							</section>
+							<section>
+								<span class="icon solid major fa-cog"></span>
+								<h3>Course of object</h3>
+								<p>Automatic conversion: Services that automatically convert cryptocurrency payments into fiat currency, reducing the risk associated with crypto volatility.</p>
+							</section>
+							<section>
+								<span class="icon solid major fa-desktop"></span>
+								<h3>Submiting an API</h3>
+								<p>API integrations: Providing application programming interfaces (APIs) for seamless integration with existing e-commerce systems, simplifying cryptocurrency payment management.</p>
+							</section>
+							<section>
+								<span class="icon solid major fa-link"></span>
+								<h3>The use of our service/h3>
+								<p>ogether, GPT-4 and JAX give clients more than just data—they give understanding, recommendations, and real business intelligence. It’s not just about managing money—it’s about making smarter moves.</p>
+							</section>
+							<section>
+								<span class="icon major fa-gem"></span>
+								<h3>Compliance and Security</h3>
+								<p>Compliance and security: Implementation of advanced security measures and compliance with regulations to protect merchants and their customers.</p>
+							</section>
+						</div>
+						<ul class="actions">
+							<li><a href="generic.html" class="button">Learn more</a></li>
+						</ul>
+					</div>
+				</section>
+
+			<!-- Three -->
+				<section id="three" class="wrapper style1 fade-up">
+					<div class="inner">
+						<h2>Get in touch</h2>
+						<p>ryptocurrency payment gateways: Integration of solutions allowing merchants to accept payments in various cryptocurrencies, facilitating transactions for customers using digital currencies</p>
+						<div class="split style1">
+							<section>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="5"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><a href="" class="button submit">Send Message</a></li>
+									</ul>
+								</form>
+							</section>
+							<section>
+								<ul class="contact">
+									<li>
+										<h3>Address</h3>
+										<span>12345 Somewhere Road #654<br />
+										Nashville, TN 00000-0000<br />
+										USA</span>
+									</li>
+									<li>
+										<h3>Email</h3>
+										<a href="#">user@untitled.tld</a>
+									</li>
+									<li>
+										<h3>Phone</h3>
+										<span>(000) 000-0000</span>
+									</li>
+									<li>
+										<h3>Social</h3>
+										<ul class="icons">
+											<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+											<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+											<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+											<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+											<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</li>
+								</ul>
+							</section>
+						</div>
+					</div>
+				</section>
+
+		</div>
+
+	<!-- Footer -->
+		<footer id="footer" class="wrapper style1-alt">
+			<div class="inner">
+				<ul class="menu">
+					<li>&copy; copyright 2025. All rights reserved netmanagement.online</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+	<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+</body>
 </html>
