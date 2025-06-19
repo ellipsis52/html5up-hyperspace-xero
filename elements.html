@@ -287,8 +287,103 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 										</div>
 									</div>
 									<h3>Left &amp; Right</h3>
-									<p><span class="image left"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
-									<p><span class="image right"><img src="images/pic06.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+									<p>< class="image left"><img src="images/pic05.jpg" alt="" /></span>I’m here to assist you with building the API for netmanagement.online and setting up the domain my.netmanagement.online, as well as integrating the Stripe payment system and OKTA reseller platform on netmanagement.online.
+Here are the steps to follow:
+Building the API for netmanagement.online:
+Define the endpoints and functionalities needed for the API.
+Write the code for the API using a programming language or framework of your choice.
+Test the API thoroughly to ensure it functions as intended.
+Setting up the domain my.netmanagement.online:
+Purchase the domain name to forward my.netmanagement.online from a domain registrar.
+Configure the DNS settings to point to the appropriate server or hosting provider where netmanagement.online is hosted.
+Set up any necessary subdomain configurations on your hosting platform.
+Integrating the Stripe payment system:
+Create a Stripe account if you don’t already have one.
+Implement the necessary Stripe API calls in your application to handle payments.
+Test the payment flow to ensure transactions are processed correctly.
+Setting up the XERO PARTNER subscription on netmanagement.online:
+Visit the netmanagement.online website and navigate to the XERO PARTNER subscription page.
+Follow the subscription process and provide the necessary information to become a XERO PARTNER.
+Once subscribed, follow any onboarding instructions provided by XERO to set up your reseller platform.
+									<p><span class="image right"><img src="images/pic06.jpg" alt="" /></span>Step-by-Step Guide to Set Up Xero Partner 2.0
+
+Introduction:
+Xero Partner 2.0 is a tool that allows you to integrate Xero features into an application via a secure API. This guide will walk you through all the necessary steps to connect your application to Xero and correctly set up authentication tokens, API keys, and error handling.
+1. Create a Xero Account and Set Up the API
+
+Before you can use Xero Partner 2.0, you must have a Xero Partner account and create an app in the Xero Developer Console.
+Steps:
+Create an account on Xero Developer.
+Once your account is validated, log in and go to the My Apps section.
+Click Create a new app to generate a new API application.
+Fill in the required information (application name, redirect URL, etc.).
+Once the app is created, you will receive a Client ID and Client Secret. Make sure to save these securely as you’ll need them to integrate with your application.
+2. Integrate the Client ID and Client Secret
+
+Your application will need the Client ID and Client Secret provided by Xero to interact with their API.
+Steps:
+Add the following variables to your project’s .env file:
+REACT_APP_XERO_CLIENT_ID=YOUR_CLIENT_ID
+REACT_APP_XERO_CLIENT_SECRET=YOUR_CLIENT_SECRET
+Ensure these keys are securely added and protected to prevent any data leakage.
+3. Obtain an Access Token (OAuth2)
+
+Once your app is configured with the Client ID and Client Secret, you need to generate an access token using the OAuth2 authentication process. This token allows you to securely call the Xero API.
+Steps:
+Redirect the user to the Xero authentication URL with the required parameters (Client ID, redirect URL, scope, etc.).
+Example URL:
+sql
+https://login.xero.com/identity/connect/authorize?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URL&scope=offline_access
+After logging in, Xero will redirect to the specified URL with an authorization code.
+Use this code to obtain an access token and a refresh token by sending a POST request to the Xero API.
+Store these tokens securely for use in future API calls.
+4. Make Secure API Calls
+
+With the access token in hand, you can now make secure API calls to Xero. For example, you can retrieve contact or transaction data.
+API Request Example:
+javascript
+fetch('https://api.xero.com/api.xro/2.0/Invoices', {
+method: 'GET',
+headers: {
+'Authorization': `Bearer ${ACCESS_TOKEN}`,
+'Accept': 'application/json',
+}
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+5. Handle Token Refresh
+
+Tokens have a limited lifespan. When the access token expires, you must use the refresh token to obtain a new access token.
+Steps:
+Send a POST request to the token refresh endpoint:
+bash
+POST https://identity.xero.com/connect/token
+Provide the refresh token and other necessary information to get a new access token.
+Make sure the access token is updated in your application every time it’s refreshed.
+6. Handle Errors
+
+Xero API errors must be handled properly to ensure your application remains functional.
+Common Errors:
+401 Unauthorized: Your access token is invalid or expired.
+Solution: Check your token or refresh it using the refresh token.
+400 Bad Request: The parameters of your request are incorrect.
+Solution: Verify the parameters sent in the API request.
+429 Too Many Requests: You have reached the API request limit per minute.
+Solution: Implement rate-limiting to comply with API restrictions.
+7. Secure Your Data
+
+Ensure all sensitive information—API keys, tokens, and secrets—is stored securely, preferably in a .env file or through a secrets management solution such as AWS Secrets Manager or Azure Key Vault.
+8. Testing and Validation
+
+Before going live, perform thorough testing to ensure your integration with Xero is working correctly:
+Verify that you can retrieve data through the API.
+Ensure tokens are properly handled (expiration and refresh).
+Run load tests to make sure your app can handle multiple simultaneous API calls without issues.
+Conclusion
+
+By following this guide, you should be able to successfully integrate Xero Partner 2.0 into your application, ensure secure API connectivity, and manage authentication tokens with confidence.
+Feel free to consult the official Xero documentation for more technical details, or reach out to me if you have specific implementation questions.</p>
 								</section>
 
 						</div>
