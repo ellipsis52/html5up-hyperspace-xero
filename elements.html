@@ -409,5 +409,17 @@ Feel free to consult the official Xero documentation for more technical details,
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
-	</body>
+	</body><script src="https://js.stripe.com/v3/"></script>
+<script>
+  const stripe = Stripe("pk_test_..."); // Remplace par ta clé publique STRIPE_PUBLISHABLE_KEY
+
+  document.getElementById("checkout-button").addEventListener("click", async () => {
+    const response = await fetch("/api/stripe/checkout", {
+      method: "POST",
+    });
+    const session = await response.json();
+    stripe.redirectToCheckout({ sessionId: session.id });
+  });
+</script>
+
 </html>
