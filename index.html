@@ -1,11 +1,4 @@
-<!DOCTYPE HTML>
-<!--
-	Hyperspace by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html lang="en">
-<head><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -93,6 +86,18 @@
       font-size: 1rem;
       display: none;
     }
+    footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #444;
+      font-size: 0.9rem;
+    }
+    .footer-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
@@ -103,13 +108,13 @@
     <div class="card">
       <h2>Outgoing Payment (Xero)</h2>
       <label>Xero Contact ID</label>
-      <input id="xeroContactId" type="text" placeholder="12345678-aaaa-bbbb-cccc-ddddeeeeffff"/>
+      <input id="xeroContactId" type="text" placeholder="12345678-aaaa-bbbb-cccc-ddddeeeeffff" />
       <label>IBAN</label>
-      <input id="xeroIban" type="text" placeholder="Your IBAN"/>
+      <input id="xeroIban" type="text" placeholder="Your IBAN" />
       <label>Amount</label>
-      <input id="xeroAmount" type="text" placeholder="100.00"/>
+      <input id="xeroAmount" type="text" placeholder="100.00" />
       <label>Description</label>
-      <input id="xeroDescription" type="text" placeholder="Supplier payment"/>
+      <input id="xeroDescription" type="text" placeholder="Supplier payment" />
       <button onclick="makeXeroPayment()">Make Xero Payment</button>
       <p id="xeroError" class="error">Error message</p>
       <p id="xeroLoading" class="loading">Processing...</p>
@@ -125,9 +130,9 @@
         <option>Tether (USDT)</option>
       </select>
       <label>Amount</label>
-      <input id="cryptoAmount" type="text" placeholder="100.00"/>
+      <input id="cryptoAmount" type="text" placeholder="100.00" />
       <label>IBAN</label>
-      <input id="cryptoIban" type="text" placeholder="Your IBAN"/>
+      <input id="cryptoIban" type="text" placeholder="Your IBAN" />
       <button onclick="sendCryptoPayment()">Send Crypto Payment</button>
       <p id="cryptoError" class="error">Error message</p>
       <p id="cryptoLoading" class="loading">Processing...</p>
@@ -137,10 +142,10 @@
     <div class="card">
       <h2>Interact with GPT-4</h2>
       <label>Ask GPT-4 a question</label>
-      <input id="gptQuestion" type="text" placeholder="Your question here"/>
+      <input id="gptQuestion" type="text" placeholder="Your question here" />
       <button onclick="askGpt()">Ask Question</button>
       <p id="gptError" class="error">Error message</p>
-      <div id="gptResponse" class="response" style="display: none;">
+      <div id="gptResponse" class="response">
         <h3>GPT-4 Response:</h3>
         <p>Answer will appear here.</p>
       </div>
@@ -149,7 +154,7 @@
 
     <!-- Payment History -->
     <div class="card" style="grid-column: span 3;">
-      <h3>Payment History</h3>
+      <h2>Payment History</h2>
       <table>
         <thead>
           <tr>
@@ -180,6 +185,10 @@
 
   <script>
     async function makeXeroPayment() {
+      const xeroContactId = document.getElementById('xeroContactId').value;
+      const xeroIban = document.getElementById('xeroIban').value;
+      const xeroAmount = document.getElementById('xeroAmount').value;
+      const xeroDescription = document.getElementById('xeroDescription').value;
       document.getElementById('xeroLoading').style.display = 'block';
       document.getElementById('xeroError').style.display = 'none';
       try {
@@ -194,6 +203,9 @@
     }
 
     async function sendCryptoPayment() {
+      const cryptoCurrency = document.getElementById('cryptoCurrency').value;
+      const cryptoAmount = document.getElementById('cryptoAmount').value;
+      const cryptoIban = document.getElementById('cryptoIban').value;
       document.getElementById('cryptoLoading').style.display = 'block';
       document.getElementById('cryptoError').style.display = 'none';
       try {
@@ -218,7 +230,7 @@
           document.getElementById('gptResponse').style.display = 'block';
           document.getElementById('gptResponse').innerHTML = `
             <h3>GPT-4 Response:</h3>
-            <p>Here is the response to your question: ${question}</p>
+            <p>Here is the simulated response to your question: ${question}</p>
           `;
         }, 2000);
       } catch (error) {
@@ -228,212 +240,56 @@
     }
   </script>
 
-</body>
-</html>
-
-	
-  </head>
-  <body class="text-gray-900 bg-gray-50">
-    <div id="root"></div>
-    <script type="module" src="/assets/index-[hash].js"></script>
-  </body>
-</html>
-
-<body class="is-preload">
-
-	<!-- Sidebar -->
-	<section id="sidebar">
-		<div class="inner">
-			<nav>
-				<ul>
-					<li><a href="#intro">Welcome</a></li>
-					<li><a href="#one">Who we are</a></li>
-					<li><a href="#two">What we do</a></li>
-					<li><a href="#three">Get in touch</a></li>
-				</ul>
-			</nav>
-		</div>
-	</section>
-
-	<!-- Wrapper -->
-	<div id="wrapper">
-
-		<!-- Intro -->
-		<section id="intro" class="wrapper style1 fullscreen fade-up">
-			<div class="inner">
-				<h1>Hyperspace</h1>
-				<p>Just another fine responsive site template designed by 
-					<a href="http://html5up.net">HTML5 UP</a><br />
-					and released for free under the 
-					<a href="http://html5up.net/license">Creative Commons</a>.
-				</p>
-				<ul class="actions">
-					<li><a href="#one" class="button scrolly">Learn more</a></li>
-				</ul>
-			</div>
-		</section>
-
-		<!-- One -->
-		<section id="one" class="wrapper style2 spotlights">
-			<section>
-				<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
-				<div class="content">
-					<div class="inner">
-						<h1>Payer avec Stripe</h1>
-						<button id="checkout-button">Procéder au paiement</button>
-						<ul class="actions">
-							<li><a href="generic.html" class="button">Learn more</a></li>
-						</ul>
-					</div>
-				</div>
-			</section>
-			<section>
-				<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
-				<div class="content">
-					<div class="inner">
-						<h2>Move to Stripe</h2>
-						<p>Okta handles secure authentication, verifying every user and managing permissions with precision.</p>
-						<ul class="actions">
-							<li><a href="generic.html" class="button">Learn more</a></li>
-						</ul>
-					</div>
-				</div>
-			</section>
-			<section>
-				<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
-				<div class="content">
-					<div class="inner">
-						<h2>Get on true</h2>
-						<p>Xero Partner 2.0 integration brings user role management, billing sync, and real-time data to the forefront of financial clarity.</p>
-						<ul class="actions">
-							<li><a href="generic.html" class="button">Learn more</a></li>
-						</ul>
-					</div>
-				</div>
-			</section>
-		</section>
-
-		<!-- Two -->
-		<section id="two" class="wrapper style3 fade-up">
-			<div class="inner">
-				<h2>What we do</h2>
-				<p>GPT-4 brings intelligence to your financial operations: from summaries to suggestions, clarity is just a prompt away.</p>
-				<div class="features">
-					<section>
-						<span class="icon solid major fa-code"></span>
-						<h3>How our algorithm works</h3>
-						<p>GPT-4 clarifies financial behavior with elegance, guiding users through expense tracking and forecasts.</p>
-					</section>
-					<section>
-						<span class="icon solid major fa-lock"></span>
-						<h3>Xero and JAX</h3>
-						<p>JAX makes data visual. GPT-4 gives it meaning. Together, they create insight in real-time.</p>
-					</section>
-					<section>
-						<span class="icon solid major fa-cog"></span>
-						<h3>Course of object</h3>
-						<p>Convert crypto to fiat instantly. Volatility? Tamed.</p>
-					</section>
-					<section>
-						<span class="icon solid major fa-desktop"></span>
-						<h3>Submitting an API</h3>
-						<p>APIs that blend seamlessly into e-commerce workflows for crypto payments with ease.</p>
-					</section>
-					<section>
-						<span class="icon solid major fa-link"></span>
-						<h3>The use of our service</h3>
-						<p>Together, GPT-4 and JAX empower understanding, recommendations, and business intelligence.</p>
-					</section>
-					<section>
-						<span class="icon major fa-gem"></span>
-						<h3>Compliance and Security</h3>
-						<p>Security isn't optional. It’s embedded—from data to regulation.</p>
-					</section>
-				</div>
-				<ul class="actions">
-					<li><a href="generic.html" class="button">Learn more</a></li>
-				</ul>
-			</div>
-		</section>
-
-		<!-- Three -->
-		<section id="three" class="wrapper style1 fade-up">
-			<div class="inner">
-				<h2>Get in touch</h2>
-				<p>Accept payments in crypto with elegance. Let your users glide from wallet to invoice in seconds.</p>
-				<div class="split style1">
-					<section>
-						<form method="post" action="#">
-							<div class="fields">
-								<div class="field half">
-									<label for="name">Name</label>
-									<input type="text" name="name" id="name" />
-								</div>
-								<div class="field half">
-									<label for="email">Email</label>
-									<input type="text" name="email" id="email" />
-								</div>
-								<div class="field">
-									<label for="message">Message</label>
-									<textarea name="message" id="message" rows="5"></textarea>
-								</div>
-							</div>
-							<ul class="actions">
-								<li><a href="#" class="button submit">Send Message</a></li>
-							</ul>
-						</form>
-					</section>
-					<section>
-						<ul class="contact">
-							<li>
-								<h3>Address</h3>
-								<span>12345 Somewhere Road #654<br />
-								Nashville, TN 00000-0000<br />
-								USA</span>
-							</li>
-							<li>
-								<h3>Email</h3>
-								<a href="#">user@untitled.tld</a>
-							</li>
-							<li>
-								<h3>Phone</h3>
-								<span>(000) 000-0000</span>
-							</li>
-							<li>
-								<h3>Social</h3>
-								<ul class="icons">
-									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-								</ul>
-							</li>
-						</ul>
-					</section>
-				</div>
-			</div>
-		</section>
-	</div>
-
-	<!-- Footer -->
-	<footer id="footer" class="wrapper style1-alt">
-		<div class="inner">
-			<ul class="menu">
-				<li>&copy; copyright 2025. All rights reserved netmanagement.online</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</footer>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
+  <footer>
+    <h2>Welcome</h2>
+    <div class="footer-columns">
+      <div>
+        <h3>Who we are</h3>
+        <p>Hyperspace – Just another fine responsive site template by HTML5 UP. Free under Creative Commons.</p>
+        <p><a href="#">Learn more</a></p>
+      </div>
+      <div>
+        <h3>Payer avec Stripe</h3>
+        <button>Procéder au paiement</button>
+        <p><a href="#">Learn more</a></p>
+      </div>
+      <div>
+        <h3>Move to Stripe</h3>
+        <p>Okta handles secure authentication, verifying every user and managing permissions with precision.</p>
+        <p><a href="#">Learn more</a></p>
+      </div>
+      <div>
+        <h3>What we do</h3>
+        <p>Xero Partner 2.0 brings role management, billing sync, and real-time financial clarity.</p>
+        <p>GPT-4 brings intelligence to your operations: summaries, suggestions, clarity.</p>
+        <p>JAX + GPT-4: data visual + meaning = live insight.</p>
+        <p>Convert crypto to fiat instantly. Volatility? Tamed.</p>
+      </div>
+      <div>
+        <h3>API & Compliance</h3>
+        <p>APIs that blend into e-commerce workflows for seamless crypto payments.</p>
+        <p>GPT-4 + JAX empower understanding, recommendations, and insights.</p>
+        <p>Security is embedded — from data to regulation.</p>
+      </div>
+      <div>
+        <h3>Get in touch</h3>
+        <form>
+          <label>Name</label>
+          <input type="text" placeholder="Your name" />
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com" />
+          <label>Message</label>
+          <textarea rows="3" placeholder="Your message"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <p>Address: 12345 Somewhere Road #654, Nashville, TN 00000-0000, USA</p>
+        <p>Email: user@untitled.tld</p>
+        <p>Phone: (000) 000-0000</p>
+        <p>Social: Twitter | Facebook | GitHub | Instagram | LinkedIn</p>
+      </div>
+    </div>
+    <p style="margin-top:2rem; text-align:center;">© copyright 2025. All rights reserved netmanagement.online<br/>Design: HTML5 UP</p>
+  </footer>
 
 </body>
 </html>
