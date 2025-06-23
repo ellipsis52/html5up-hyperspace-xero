@@ -103,6 +103,72 @@
 <body>
 
   <div class="grid">
+<!-- Outgoing Payment (Xero) -->
+<div class="card">
+  <h2>Outgoing Payment (Xero)</h2>
+  <label>Xero Contact ID</label>
+  <input type="text" placeholder="12345678-aaaa-bbbb-cccc-ddddeeeeffff" />
+  <label>IBAN</label>
+  <input type="text" placeholder="Your IBAN" />
+  <label>Amount</label>
+  <input type="text" placeholder="100.00" />
+  <label>Description</label>
+  <input type="text" placeholder="Supplier payment" />
+  <button>Make Xero Payment</button>
+</div>
+
+<!-- Crypto Payment to OKX -->
+<div class="card">
+  <h2>Crypto Payment to OKX</h2>
+  <label>Cryptocurrency</label>
+  <select>
+    <option>Bitcoin (BTC)</option>
+    <option>Ethereum (ETH)</option>
+    <option>Tether (USDT)</option>
+  </select>
+  <label>Amount</label>
+  <input type="text" placeholder="100.00" />
+  <label>IBAN</label>
+  <input type="text" placeholder="Your IBAN" />
+  <button>Send Crypto Payment</button>
+</div>
+
+<!-- GPT-4 Interaction -->
+<div class="card">
+  <h2>Interact with GPT-4</h2>
+  <label>Ask GPT-4 a question</label>
+  <input type="text" placeholder="Your question here" />
+  <button>Ask Question</button>
+</div>
+
+<!-- Payment History -->
+<div class="card" style="grid-column: span 3;">
+  <h2>Payment History</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Crypto / Xero</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Xero</td>
+        <td>Xero Payment</td>
+        <td>100.00</td>
+        <td>Completed</td>
+      </tr>
+      <tr>
+        <td>OKX</td>
+        <td>ETH</td>
+        <td>250.00</td>
+        <td>Pending</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
     <!-- Outgoing Payment (Xero) -->
     <div class="card">
