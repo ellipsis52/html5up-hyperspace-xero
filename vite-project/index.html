@@ -1,75 +1,108 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vanilla Web App</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #000000;
+      color: #ffffff;
+      margin: 0;
+      padding: 2rem;
+    }
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .card {
+      background: white;
+      color: #000;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      padding: 1.5rem;
+    }
+    h2, h3 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: block;
+      margin-top: 1rem;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 0.375rem;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+    }
+    button:hover {
+      background-color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    .response {
+      background: #f0f0f0;
+      color: #000;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .error {
+      color: red;
+      font-size: 0.875rem;
+      display: none;
+    }
+    .loading {
+      color: #00bfff;
+      font-size: 1rem;
+      display: none;
+    }
+    footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #444;
+      font-size: 0.9rem;
+    }
+    .footer-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
 
   <div class="grid">
-<!-- Outgoing Payment (Xero) -->
-<div class="card">
-  <h2>Outgoing Payment (Xero)</h2>
-  <label>Xero Contact ID</label>
-  <input type="text" placeholder="12345678-aaaa-bbbb-cccc-ddddeeeeffff" />
-  <label>IBAN</label>
-  <input type="text" placeholder="Your IBAN" />
-  <label>Amount</label>
-  <input type="text" placeholder="100.00" />
-  <label>Description</label>
-  <input type="text" placeholder="Supplier payment" />
-  <button>Make Xero Payment</button>
-</div>
-
-<!-- Crypto Payment to OKX -->
-<div class="card">
-  <h2>Crypto Payment to OKX</h2>
-  <label>Cryptocurrency</label>
-  <select>
-    <option>Bitcoin (BTC)</option>
-    <option>Ethereum (ETH)</option>
-    <option>Tether (USDT)</option>
-  </select>
-  <label>Amount</label>
-  <input type="text" placeholder="100.00" />
-  <label>IBAN</label>
-  <input type="text" placeholder="Your IBAN" />
-  <button>Send Crypto Payment</button>
-</div>
-
-<!-- GPT-4 Interaction -->
-<div class="card">
-  <h2>Interact with GPT-4</h2>
-  <label>Ask GPT-4 a question</label>
-  <input type="text" placeholder="Your question here" />
-  <button>Ask Question</button>
-</div>
-
-<!-- Payment History -->
-<div class="card" style="grid-column: span 3;">
-  <h2>Payment History</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Crypto / Xero</th>
-        <th>Amount</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Xero</td>
-        <td>Xero Payment</td>
-        <td>100.00</td>
-        <td>Completed</td>
-      </tr>
-      <tr>
-        <td>OKX</td>
-        <td>ETH</td>
-        <td>250.00</td>
-        <td>Pending</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
     <!-- Outgoing Payment (Xero) -->
     <div class="card">
