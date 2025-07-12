@@ -1,4 +1,8 @@
 {
-  "builds": [],
-  "outputDirectory": "html5up-hyperspace"
+  "builds": [
+    { "src": "html5up-hyperspace/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/html5up-hyperspace/$1" }
+  ]
 }

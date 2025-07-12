@@ -186,7 +186,7 @@ lock.show(); <
 /script> < /
 body > <
     /html>  <
-    script >
+script >
     window.addEventListener('message', function (event) {
         if (event.data === 'close') {
             lock.hide();
