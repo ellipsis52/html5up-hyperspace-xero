@@ -1,13 +1,4 @@
 {
-  "builds": [
-    { "src": "html5up-hyperspace/**", "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "/", "dest": "/html5up-hyperspace/index.html" },
-    { "src": "/(.*)", "dest": "/html5up-hyperspace/$1" }
-  ]
-}
-{
   "version": 2,
   "builds": [
     {
@@ -15,11 +6,13 @@
       "use": "@vercel/node"
     },
     {
-      "src": "public/**/*",
+      "src": "html5up-hyperspace/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     { "src": "/callback", "dest": "/server.js" },
-    { "src": "/(.*)", "dest": "/public/$1" }
+    { "src": "/", "dest": "/html5up-hyperspace/index.html" },
+    { "src": "/(.*)", "dest": "/html5up-hyperspace/$1" }
   ]
+}
