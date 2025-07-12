@@ -1,3 +1,128 @@
+# 🚀 Hyperspace — Netmanagement Online Portal
+
+A modern and elegant interface that blends the power of **Auth0 authentication**, **Xero Partner 2.0 API**, and **Stripe payments**, wrapped in the sleek design of the [HTML5 UP Hyperspace theme](https://html5up.net/hyperspace).
+
+> “In the vastness of hyperspace, your finances remain secure, streamlined, and beautiful.”
+
+---
+
+## ✨ Features
+
+* 🔐 **Secure Login with Auth0**
+  OAuth2 flow with OpenID Connect support for seamless user authentication.
+
+* 💼 **Xero Partner 2.0 Integration**
+  Access real-time billing, accounting, and organizational data directly through Xero’s API.
+
+* 💳 **Stripe Payment Flow**
+  Embedded payment experiences with Stripe for one-time or recurring billing.
+
+* 🧠 **GPT-4 Data Assistant**
+  Integrated AI to help users interpret, summarize, and act on financial insights.
+
+* ⚙️ **API Ready**
+  Built with future-proof endpoints to plug into your own financial or crypto backend.
+
+---
+
+## 🔧 Tech Stack
+
+* **Frontend**: HTML5, CSS3 (from Hyperspace), vanilla JS
+* **Auth**: Auth0 OAuth2 + redirect callback handling
+* **Backend Integration**: Express.js API (external or embedded)
+* **Financial Tools**: Xero API + Stripe.js
+* **AI Layer**: Optional GPT-4 integration for assistant services
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ellipsis52/html5up-hyperspace-xero.git
+cd html5up-hyperspace-xero
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+Make sure you're using **Node.js 16.x** as required by the project:
+
+```bash
+nvm install 16
+nvm use 16
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file and include:
+
+```env
+AUTH0_CLIENT_ID=your_client_id
+AUTH0_DOMAIN=your_auth0_domain
+AUTH0_REDIRECT_URI=https://yourdomain.com/callback
+XERO_CLIENT_ID=your_xero_client_id
+XERO_CLIENT_SECRET=your_secret
+STRIPE_PUBLIC_KEY=your_stripe_key
+```
+
+> Optional: Use [dotenv](https://www.npmjs.com/package/dotenv) in your backend if needed.
+
+---
+
+## 🧪 Development
+
+Run a local development server (if using with Vite or another bundler):
+
+```bash
+npm run dev
+```
+
+Or deploy directly as static HTML if no build step is required.
+
+---
+
+## 🌍 Deployment
+
+This template can be deployed on:
+
+* **Vercel** (recommended)
+* **Netlify**
+* Any static hosting provider (e.g., GitHub Pages, Cloudflare Pages)
+
+Make sure your Auth0 and Xero callback URLs match your deployment domain.
+
+---
+
+## 📸 Preview
+
+![Hyperspace Login](https://raw.githubusercontent.com/ellipsis52/html5up-hyperspace-xero/main/assets/preview-login.png)
+
+---
+
+## 🤝 Acknowledgements
+
+* [HTML5 UP](https://html5up.net) for the **Hyperspace** design.
+* [Auth0](https://auth0.com) for the secure login flow.
+* [Xero](https://developer.xero.com) for their powerful API.
+* [Stripe](https://stripe.com) for payment processing.
+* [OpenAI](https://openai.com) for the AI assistant layer.
+
+---
+
+## 📄 License
+
+Creative Commons for the UI template (HTML5 UP), and MIT for custom code.
+
+---
+
+🚀 Powered by [Netmanagement.online](https://netmanagement.online) – Your partner in intelligent finance automation.
+
+
 # Express Authorization for RS256-Signed Tokens
 
 This sample demonstrates how to protect endpoints in an Express API by verifying an incoming JWT access token signed by Auth0. The token must be signed with the RS256 algorithm and must be verified against your Auth0 JSON Web Key Set.
