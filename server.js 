@@ -60,3 +60,94 @@ app.get('/callback', (req, res) => {
 app.listen(PORT, () => {
   console.log(`✨ Le serveur s’élève sur le port ${PORT} — prêt à recevoir le souffle des visiteurs.`);
 });
+
+
+// Endpoint pour gérer la redirection après Auth0
+app.get('/callback', (req, res) => {
+  const { code } = req.query;
+  if (code) {
+    // Ici tu pourrais échanger le code contre un token, valider, etc.
+    // Pour l’instant, redirection vers Stripe (ou tableau de bord)
+    return res.redirect('https://dashboard.stripe.com');
+  }
+  res.status(400).send('Missing code parameter');
+  });
+  app.use(express.static('public')); // dossier contenant ton HTML, CSS, images
+  app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
+  });
+  import express from 'express';
+  import cors from 'cors';
+  import dotenv from 'dotenv';
+  dotenv.config();
+  
+  const app = express();
+  const PORT = process.env.PORT || 3000;
+  
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.static('public'));
+  
+  app.get('/callback', (req, res) => {
+    const { code } = req.query;
+    if (code) {
+      // Ici, tu pourrais ajouter le flow d’échange du code OAuth pour un token d’accès
+      // Mais pour l’instant, simple redirection poétique :
+      return res.redirect('https://dashboard.stripe.com');
+    }
+    res.status(400).send('Missing authorization code.');
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`✨ Le serveur s’élève sur le port ${PORT} — prêt à recevoir le souffle des visiteurs.`);
+  });
+  import express from 'express';
+  import cors from 'cors';
+  import dotenv from 'dotenv';
+  dotenv.config();
+  
+  const app = express();
+  const PORT = process.env.PORT || 3000;
+  
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.static('public'));
+  
+  app.get('/callback', (req, res) => {
+    const { code } = req.query;
+    if (code) {
+      // Ici, tu pourrais ajouter le flow d’échange du code OAuth pour un token d’accès
+      // Mais pour l’instant, simple redirection poétique :
+      return res.redirect('https://dashboard.stripe.com');
+    }
+    res.status(400).send('Missing authorization code.');
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`✨ Le serveur s’élève sur le port ${PORT} — prêt à recevoir le souffle des visiteurs.`);
+  });
+  import express from 'express';
+  import cors from 'cors';
+  import dotenv from 'dotenv';
+  dotenv.config();
+  
+  const app = express();
+  const PORT = process.env.PORT || 3000;
+  
+  app.use(cors());
+  app.use(express.json());
+  app.use(express.static('public'));
+  
+  app.get('/callback', (req, res) => {
+    const { code } = req.query;
+    if (code) {
+      // Ici, tu pourrais ajouter le flow d’échange du code OAuth pour un token d’accès
+      // Mais pour l’instant, simple redirection poétique :
+      return res.redirect('https://dashboard.stripe.com');
+    }
+    res.status(400).send('Missing authorization code.');
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`✨ Le serveur s’élève sur le port ${PORT} — prêt à recevoir le souffle des visiteurs.`);
+  });
