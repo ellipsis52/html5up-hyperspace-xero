@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="fr">
 <head>
-	<title>Hyperspace - Netmanagement.online</title>
+	<title>Hyperspace Xero Partner 2.0  Netmanagement.online</title>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
@@ -67,15 +67,30 @@
 				<h2>Connexion sécurisée</h2>
 				<div id="login-container">
 					<p>Authentifiez-vous pour accéder à votre espace sécurisé.</p>
-					<a class="button primary" href="https://auth0.auth0.com/u/login/identifier?state=hKFo2SAwWm92RTYySW9Fd25CYWtoNF9zMXBoNU44QTdQczNrYaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHBIdzRlNWc2RmwzMkZDdkNEMllsb3RjWW1LSEFZRk9Yo2NpZNkgekVZZnBvRnpVTUV6aWxoa0hpbGNXb05rckZmSjNoQUk">Se connecter via Auth0</a>
+					<a class="button primary" href="https://mylogin.netmanagement.online/authorize?client_id=qnLTr3RJKM9gHOFbhbUKmtkinOwKEfc4&response_type=code&scope=openid%20profile%20email&redirect_uri=https%3A%2F%2Fnetmanagement.online%2Fcallback">Se connecter via Auth0</a>
 				</div>
 			</div>
 		</section>
 
+		<!-- Redirection handler -->
 		<script>
-			if (window.location.search.includes("code=") || window.location.search.includes("access_token=")) {
-				window.location.href = "https://dashboard.stripe.com";
-			}
+			window.addEventListener('DOMContentLoaded', function () {
+				const params = new URLSearchParams(window.location.search);
+				if (params.has("code") || params.has("access_token")) {
+					// Sécurise cette étape côté backend en production
+					fetch("/api/validate-auth0", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ code: params.get("code") || params.get("access_token") })
+					}).then(res => res.json()).then(data => {
+						if (data.success) {
+							window.location.href = "https://dashboard.stripe.com";
+						} else {
+							alert("Échec de la connexion sécurisée.");
+						}
+					}).catch(() => alert("Erreur de communication avec le serveur."));
+				}
+			});
 		</script>
 
 		<!-- One -->
