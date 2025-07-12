@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
+      "src": "api/server.js",
       "use": "@vercel/node"
     },
     {
@@ -11,8 +11,15 @@
     }
   ],
   "routes": [
-    { "src": "/callback", "dest": "/server.js" },
+    { "src": "/callback", "dest": "api/server.js" },
+    { "src": "/api/cron", "dest": "api/cron.js" },
     { "src": "/", "dest": "/html5up-hyperspace/index.html" },
     { "src": "/(.*)", "dest": "/html5up-hyperspace/$1" }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron",
+      "schedule": "0 10 * * *"
+    }
   ]
 }

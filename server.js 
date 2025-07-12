@@ -1,41 +1,37 @@
+const express = require("express");
 const fetch = require("node-fetch");
 
-module.exports = async (req, res) => {
-  const { code } = req.query;
+const app = express();
 
-  if (!code) {
-    return res.status(400).send("Missing authorization code.");
-  }
+app.get("/callback", async (req, res) => {
+  const { code } = req.query;
+  if (!code) return res.status(400).send("Missing authorization code.");
 
   const tokenEndpoint = "https://mylogin.netmanagement.online/oauth/token";
-
-  const params = {
-    grant_type: "authorization_code",
-    client_id: "qnLTr3RJKM9gHOFbhbUKmtkinOwKEfc4",
-    client_secret: "hzHG8TYaNBsPdcoQnYQiwCLVQtMYRjGVeEAMbJp3tC0BNFE-MBz8qiL5LMTTWdJkT",
-    code,
-    redirect_uri: "https://netmanagement.online/callback"
-  };
 
   try {
     const response = await fetch(tokenEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(params)
+      body: JSON.stringify({
+        grant_type: "authorization_code",
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
+        code,
+        redirect_uri: "https://netmanagement.online/callback"
+      })
     });
 
     const data = await response.json();
 
     if (data.access_token) {
-      // 🔐 Jeton récupéré : ici, tu peux aussi créer une session, appeler Xero, etc.
-      res.writeHead(302, { Location: "https://go.xero.com/app/!Jr4B8/dashboard" });
-      res.end();
+      return res.redirect("https://go.xero.com/app/!Jr4B8/dashboard");
     } else {
-      console.error("Auth0 error:", data);
-      res.status(401).json({ error: "Auth failed", details: data });
+      return res.status(401).json({ error: "Auth failed", details: data });
     }
   } catch (err) {
-    console.error("Server error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error", message: err.message });
   }
-};
+});
+
+module.exports = app;
