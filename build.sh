@@ -11,3 +11,7 @@ echo "✨ Construction du site statique..."
 # ou simplement un echo si statique
 
 echo "🚀 Build terminée."
+#!/bin/bash
+git submodule update --init --recursive
+npm install
+npm run build

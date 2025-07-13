@@ -2,12 +2,13 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/server.js",
-      "use": "@vercel/node"
+      "src": "build.sh",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "html5up-hyperspace" }
     },
     {
-      "src": "build.sh",
-      "use": "@vercel/static-build"
+      "src": "api/server.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -15,5 +16,11 @@
     { "src": "/api/cron", "dest": "api/cron.js" },
     { "src": "/", "dest": "/html5up-hyperspace/index.html" },
     { "src": "/(.*)", "dest": "/html5up-hyperspace/$1" }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron",
+      "schedule": "0 10 * * *"
+    }
   ]
 }
