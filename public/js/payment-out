@@ -1,0 +1,22 @@
+app.post('/api/xero/payment-out', async (req, res) => {
+  const { contactID, iban, amount, description } = req.body;
+  try {
+    // Appelle ton intégration Xero ici (ex: xeroClient.createPayment(...))
+    const result = await xero.createPaymentOut({ contactID, iban, amount, description });
+    res.json({ message: 'Paiement Xero envoyé avec succès', result });
+  } catch (error) {
+    console.error('[XERO] Payment error:', error);
+    res.status(500).json({ message: 'Erreur lors de l’envoi du paiement Xero.' });
+  }
+});
+app.post('/api/okx/payment-out', async (req, res) => {
+    const { type, amount, iban } = req.body;
+    try {
+      const result = await okx.sendCrypto({ type, amount, iban });
+      res.json({ message: 'Transfert crypto OKX effectué', result });
+    } catch (error) {
+      console.error('[OKX] Error:', error);
+      res.status(500).json({ message: 'Erreur lors de l’envoi de crypto.' });
+    }
+  });
+  

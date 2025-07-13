@@ -24,3 +24,12 @@
     }
   ]
 }
+{
+  "routes": [
+    { "src": "/signup", "dest": "/html5up-hyperspace/signup.html" },
+    { "src": "/(.*)", "dest": "/html5up-hyperspace/$1" }
+  ]
+}
+"builds": [
+  { "src": "html5up-hyperspace/**", "use": "@vercel/static" }
+]
