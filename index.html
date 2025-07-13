@@ -29,13 +29,11 @@
 			text-decoration: none;
 		}
 
-		/* Styles pour le changement de mot de passe */
 		#change-password-section .table {
 			display: table;
 			position: absolute;
 			height: 100%;
 			width: 100%;
-			background-color: #e8ebef;
 			background: linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,0));
 		}
 		#change-password-section .cell {
@@ -104,59 +102,7 @@
 			</div>
 		</section>
 
-		<!-- Redirection handler -->
-		<script>
-			window.addEventListener('DOMContentLoaded', function () {
-				const params = new URLSearchParams(window.location.search);
-				if (params.has("code") || params.has("access_token")) {
-					fetch("/api/validate-auth0", {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ code: params.get("code") || params.get("access_token") })
-					}).then(res => res.json()).then(data => {
-						if (data.success) {
-							window.location.href = "https://dashboard.stripe.com";
-						} else {
-							alert("Secure login failed.");
-						}
-					}).catch(() => alert("Server communication error."));
-				}
-			});
-
-			// Pour afficher la section changement de mot de passe avec une douce transition
-			document.querySelectorAll('a.scrolly').forEach(link => {
-				link.addEventListener('click', function(e) {
-					if(this.getAttribute('href') === '#change-password-section') {
-						e.preventDefault();
-						document.getElementById('wrapper').style.display = 'none';
-						const changePassSection = document.getElementById('change-password-section');
-						changePassSection.style.display = 'block';
-						initChangePasswordWidget();
-						window.scrollTo(0,0);
-					}
-				});
-			});
-
-			function initChangePasswordWidget() {
-				if(window.changePasswordWidgetInitialized) return; // évite double initialisation
-				window.changePasswordWidgetInitialized = true;
-
-				new Auth0ChangePassword({
-					container: "change-password-widget-container",
-					email: "{{email | escape}}",
-					csrf_token: "{{csrf_token}}",
-					ticket: "{{ticket}}",
-					password_policy: "{{password_policy}}",
-					password_complexity_options: {{password_complexity_options}},
-					theme: {
-						icon: "{{tenant.picture_url | default: '//cdn.auth0.com/styleguide/1.0.0/img/badge.png'}}",
-						primaryColor: "{{tenant.colors.primary | default: '#ea5323'}}"
-					}
-				});
-			}
-		</script>
-
-		<!-- One -->
+		<!-- Who we are -->
 		<section id="one" class="wrapper style2 spotlights">
 			<section>
 				<a href="#" class="image"><img src="/html5up-hyperspace/images/pic01.jpg" alt="" data-position="center center" /></a>
@@ -196,7 +142,7 @@
 			</section>
 		</section>
 
-		<!-- Two -->
+		<!-- What we do -->
 		<section id="two" class="wrapper style3 fade-up">
 			<div class="inner">
 				<h2>What we do</h2>
@@ -229,7 +175,7 @@
 			</div>
 		</section>
 
-		<!-- Three -->
+		<!-- Get in touch -->
 		<section id="three" class="wrapper style1 fade-up">
 			<div class="inner">
 				<h2>Get in touch</h2>
@@ -308,7 +254,84 @@
 	<script src="/html5up-hyperspace/assets/js/breakpoints.min.js"></script>
 	<script src="/html5up-hyperspace/assets/js/util.js"></script>
 	<script src="/html5up-hyperspace/assets/js/main.js"></script>
-
 	<script src="https://cdn.auth0.com/js/change-password-1.5.min.js"></script>
-</body>
-</html>
+
+	<script>
+		const authData = {
+			email: localStorage.getItem("user_email"),
+			csrf_token: localStorage.getItem("csrf_token"),
+			ticket: localStorage.getItem("password_ticket"),
+			password_policy: "low",
+			password_complexity_options: { minLength: 8, maxLength: 128 }
+		};
+
+		window.addEventListener('DOMContentLoaded', function () {
+			const params = new URLSearchParams(window.location.search);
+			if (params.has("code") || params.has("access_token")) {
+				fetch("/api/validate-auth0", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ code: params.get("code") || params.get("access_token") })
+				}).then(res => res.json()).then(data => {
+					if (data.success) {
+						window.location.href = "https://dashboard.stripe.com";
+					} else {
+						alert("Secure login failed.");
+					}
+				}).catch(() => alert("Server communication error."));
+			}
+
+			document.querySelectorAll('a.scrolly').forEach(link => {
+				link.addEventListener('click', function(e) {
+					if(this.getAttribute('href') === '#change-password-section') {
+						e.preventDefault();
+						document.getElementById('wrapper').style.display = 'none';
+						document.getElementById('change-password-section').style.display = 'block';
+						initChangePasswordWidget();
+						window.scrollTo(0,0);
+					}
+				});
+			});
+		});
+
+		function initChangePasswordWidget() {
+			if(window.changePasswordWidgetInitialized) return;
+			window.changePasswordWidgetInitialized = true;
+		
+			const changePasswordWidget = new ChangePasswordWidget({
+				// The URL of the Change Password widget
+				changePasswordWidgetUrl: "https://change-password.auth0.com/widget",
+				// The URL of the Auth0 logout endpoint
+				logoutUrl: "https://auth0.net/logout",
+				// The URL of the Auth0 login endpoint
+				loginUrl: "https://auth0.net/login",
+				// The URL of the Auth0 callback endpoint
+				callbackUrl: "https://dashboard.stripe.com",
+				// The Auth0 domain
+				domain: "auth0.net",
+				// The Auth0 client ID
+				clientId: qnLTr3RJKM9gHOFbhbUKmtkinOwKEfc4
+# File: index.html
+callbackUrl: "https://dashboard.stripe.com",
+// The Auth0 domain
+domain: "auth0.net",
+// The Auth0 client ID
+clientId: "qnLTr3RJKM9gHOFbhbUKmtkinOwKEfc4"
+			});
+			changePasswordWidget.render("#change-password-widget");
+		}
+	</script>
+</head>
+<body class="is-preload">
+	<div id="wrapper">
+		<div id="header">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<h1><a href="/" id="logo">Hyperspace Xero Partner 2.0</a></h1>
+						<nav id="nav">
+							<ul>
+								<li><a href="#wrapper">Home</a></li>
+								<li><a href="#about-section">About</a></li>
+								<li#><a href="#services-section">Services</a></li# File: index.html
+
