@@ -14,6 +14,7 @@
     { "src": "/callback", "dest": "api/server.js" },
     { "src": "/api/cron", "dest": "api/cron.js" },
     { "src": "/", "dest": "/html5up-hyperspace/index.html" },
+    { "src": "/signup.html", "dest": "/html5up-hyperspace/signup.html" },
     { "src": "/(.*)", "dest": "/html5up-hyperspace/$1" }
   ],
   "crons": [
