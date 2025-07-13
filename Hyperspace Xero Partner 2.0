@@ -112,3 +112,108 @@
 	</script>
 </body>
 </html>
+<style>
+	/* ... */
+	#login-container {
+		max-width: 400px;
+		margin: 2rem auto;
+		background: rgba(26,34,56,0.85);
+		padding: 2rem;
+		border-radius: 12px;
+		box-shadow: 0 0 20px rgba(29,161,242,0.6);
+		color: #e0e6f3;
+		text-align: center;
+	}
+	#login-container a.button.primary {
+		margin-top: 1rem;
+		display: inline-block;
+		background-color: #1da1f2;
+		color: white;
+		padding: 0.75rem 1.5rem;
+		border-radius: 5px;
+		text-decoration: none;
+	}
+	/* ... */
+</style>
+<style>
+	/* ... */
+	#login-container {
+		max-width: 400px;
+		margin: 2rem auto;
+		background: rgba(26,34,56,0.85);
+		padding: 2rem;
+		border-radius: 12px;
+		box-shadow: 0 0 20px rgba(29,161,242,0.6);
+		color: #e0e6f3;
+		text-align: center;
+	}
+	#login-container a.button.primary {
+		margin-top: 1rem;
+        display: inline-block;
+		background-color: #1da1f2;
+		color: white;
+		padding: 0.75rem 1.5rem;
+		border-radius: 5px;
+		text-decoration: none;
+	}
+    /* ... */
+    #login-container a.button.primary {
+        margin-block-start: 1rem;
+        display: inline-block;
+        background-color: #1da1f2;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+</style>
+<style>
+	/* ... */
+	#login-container {
+		max-width: 400px;
+		margin: 2rem auto;
+		background: rgba(26,34,56,0.85);
+		padding: 2rem;
+		border-radius: 12px;
+		box-shadow: 0 0 20px rgba(29,161,242,0.6);
+		color: #e0e6f3;
+		text-align: center;
+	}
+	#login-container a.button.primary {
+		margin-top: 1rem;
+		display: inline-block;
+		background-color: #1da1f2;
+		color: white;
+		padding: 0.75rem 1.5rem;
+		border-radius: 5px;
+		text-decoration: none;
+	}
+    /* ... */
+    #login-container a.button.primary {
+        margin-block-start: 
+        1rem;
+        display: inline-block;
+        background-color: #1da1f2;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<header id="header"><h1><a href="/html5up-hyperspace/index.html">Hyperspace Xero Partner 2.0</a></h1></header>
+                <div id="login-container">
+                <form action="/html5up-hyperspace/login" method="post" id="login-form">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" required>
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" required>
+                        <input type="submit" value="Login" id="login-button">
+                    </form>
+                </div>
