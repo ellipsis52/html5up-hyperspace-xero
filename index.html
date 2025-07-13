@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 	<link rel="stylesheet" href="/html5up-hyperspace/assets/css/main.css" />
 	<noscript><link rel="stylesheet" href="/html5up-hyperspace/assets/css/noscript.css" /></noscript>
+
 	<style>
 		#login-container {
 			max-width: 400px;
@@ -27,6 +28,25 @@
 			border-radius: 5px;
 			text-decoration: none;
 		}
+
+		/* Styles pour le changement de mot de passe */
+		#change-password-section .table {
+			display: table;
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			background-color: #e8ebef;
+			background: linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,0));
+		}
+		#change-password-section .cell {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		#change-password-section .content {
+			padding: 25px 0;
+			margin: 0 auto;
+			width: 280px;
+		}
 	</style>
 </head>
 <body class="is-preload">
@@ -38,6 +58,7 @@
 				<ul>
 					<li><a href="#intro">Welcome</a></li>
 					<li><a href="#login">Login</a></li>
+					<li><a href="#change-password-section" class="scrolly">Change Password</a></li>
 					<li><a href="#one">Who we are</a></li>
 					<li><a href="#two">What we do</a></li>
 					<li><a href="#three">Get in touch</a></li>
@@ -72,6 +93,17 @@
 			</div>
 		</section>
 
+		<!-- Change Password Section -->
+		<section id="change-password-section" class="wrapper style1 fade-up" style="display:none;">
+			<div class="table">
+				<div class="cell">
+					<div class="content">
+						<div id="change-password-widget-container"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
 		<!-- Redirection handler -->
 		<script>
 			window.addEventListener('DOMContentLoaded', function () {
@@ -90,6 +122,38 @@
 					}).catch(() => alert("Server communication error."));
 				}
 			});
+
+			// Pour afficher la section changement de mot de passe avec une douce transition
+			document.querySelectorAll('a.scrolly').forEach(link => {
+				link.addEventListener('click', function(e) {
+					if(this.getAttribute('href') === '#change-password-section') {
+						e.preventDefault();
+						document.getElementById('wrapper').style.display = 'none';
+						const changePassSection = document.getElementById('change-password-section');
+						changePassSection.style.display = 'block';
+						initChangePasswordWidget();
+						window.scrollTo(0,0);
+					}
+				});
+			});
+
+			function initChangePasswordWidget() {
+				if(window.changePasswordWidgetInitialized) return; // évite double initialisation
+				window.changePasswordWidgetInitialized = true;
+
+				new Auth0ChangePassword({
+					container: "change-password-widget-container",
+					email: "{{email | escape}}",
+					csrf_token: "{{csrf_token}}",
+					ticket: "{{ticket}}",
+					password_policy: "{{password_policy}}",
+					password_complexity_options: {{password_complexity_options}},
+					theme: {
+						icon: "{{tenant.picture_url | default: '//cdn.auth0.com/styleguide/1.0.0/img/badge.png'}}",
+						primaryColor: "{{tenant.colors.primary | default: '#ea5323'}}"
+					}
+				});
+			}
 		</script>
 
 		<!-- One -->
@@ -165,65 +229,66 @@
 			</div>
 		</section>
 
-	</div><!-- Three -->
-					2>Get in touch</h2>
-							<p>Cryptocurrency payment gateways: enabling merchants to accept payments in various cryptocurrencies.</p>
-
-							<div class="split style1">
-								<section>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="name">Name</label>
-												<input type="text" name="name" id="name" />
-											</div>
-											<div class="field half">
-												<label for="email">Email</label>
-												<input type="text" name="email" id="email" />
-											</div>
-											<div class="field">
-												<label for="message">Message</label>
-												<textarea name="message" id="message" rows="5"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><a href="" class="button submit">Send Message</a></li>
-										</ul>
-									</form>
-								</section>
-								<section>
-									<ul class="contact">
-										<li>
-											<h3>Address</h3>
-											<span>33 les bolles du temples<br />
-											2117 la cote aux fees <br />
-											switzerland</span>
-										</li>
-										<li>
-											<h3>Email</h3>
-											<a href="#">info@netmanagement.online</a>
-										</li>
-										<li>
-											<h3>Phone</h3>
-											<span>+1(770) 800 8448</span>
-										</li>
-										<li>
-											<h3>Social</h3>
-											<ul class="icons">
-												<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-												<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-												<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-												<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-												<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-											</ul>
-										</li>
-									</ul>
-								</section>
+		<!-- Three -->
+		<section id="three" class="wrapper style1 fade-up">
+			<div class="inner">
+				<h2>Get in touch</h2>
+				<p>Cryptocurrency payment gateways: enabling merchants to accept payments in various cryptocurrencies.</p>
+				<div class="split style1">
+					<section>
+						<form method="post" action="#">
+							<div class="fields">
+								<div class="field half">
+									<label for="name">Name</label>
+									<input type="text" name="name" id="name" />
+								</div>
+								<div class="field half">
+									<label for="email">Email</label>
+									<input type="text" name="email" id="email" />
+								</div>
+								<div class="field">
+									<label for="message">Message</label>
+									<textarea name="message" id="message" rows="5"></textarea>
+								</div>
 							</div>
-						</div>
+							<ul class="actions">
+								<li><input type="submit" value="Send Message" class="button submit" /></li>
+							</ul>
+						</form>
 					</section>
-
+					<section>
+						<ul class="contact">
+							<li>
+								<h3>Address</h3>
+								<span>33 les bolles du temples<br />
+								2117 la cote aux fees <br />
+								switzerland</span>
+							</li>
+							<li>
+								<h3>Email</h3>
+								<a href="#">info@netmanagement.online</a>
+							</li>
+							<li>
+								<h3>Phone</h3>
+								<span>+1(770) 800 8448</span>
+							</li>
+							<li>
+								<h3>Social</h3>
+								<ul class="icons">
+									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</div>
 			</div>
+		</section>
+
+	</div>
 
 	<!-- Footer -->
 	<footer id="footer" class="wrapper style1-alt">
@@ -243,5 +308,7 @@
 	<script src="/html5up-hyperspace/assets/js/breakpoints.min.js"></script>
 	<script src="/html5up-hyperspace/assets/js/util.js"></script>
 	<script src="/html5up-hyperspace/assets/js/main.js"></script>
+
+	<script src="https://cdn.auth0.com/js/change-password-1.5.min.js"></script>
 </body>
 </html>
