@@ -8,5 +8,5 @@
         "**/Thumbs.db": true,
         ".mule": true
     },
-    "CodeGPT.apiKey": "CodeGPT Plus Beta"
+    "DockerRun.DisableDockerrc": true
 }

@@ -1,9 +1,0 @@
-// Example using the post-login trigger
-
-exports.onExecutePostLogin = async (event, api) => {
-  api.prompt.render(':form_id');
-}
-
-exports.onContinuePostLogin = async (event, api) => {
-  // Add your logic after completing the form
-}
