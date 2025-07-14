@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hyperspace Xero Dashboard</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap" />
+  <style>
+    /* --- RESET & BASE --- */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Ubuntu', sans-serif;
+      background: #0e0f19;
+      color: #eee;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-weight: 700;
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #7fffd4;
+      text-shadow: 0 0 8px #7fffd4aa;
+    }
+    /* --- NAV LINKS --- */
+    nav {
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 2rem;
+    }
+    nav a {
+      color: #7fffd4;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 2px solid #7fffd4;
+      border-radius: 30px;
+      transition: background 0.3s ease, color 0.3s ease;
+      box-shadow: 0 0 10px #7fffd4aa;
+    }
+    nav a:hover {
+      background: #7fffd4;
+      color: #0e0f19;
+      box-shadow: 0 0 20px #7fffd4ff;
+    }
+    /* --- SEARCH BAR --- */
+    #searchBar {
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+      display: flex;
+    }
+    #searchInput {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px 0 0 30px;
+      outline: none;
+      box-shadow: 0 0 10px #00ffff44;
+      background: #121226;
+      color: #eee;
+      transition: box-shadow 0.3s ease;
+    }
+    #searchInput:focus {
+      box-shadow: 0 0 18px #00ffffaa;
+    }
+    #refreshBtn {
+      padding: 0 1.5rem;
+      border: none;
+      border-radius: 0 30px 30px 0;
+      background: #7fffd4;
+      color: #0e0f19;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 12px #7fffd4cc;
+      transition: background 0.3s ease;
+    }
+    #refreshBtn:hover {
+      background: #44d7b6;
+    }
+    /* --- TABLE --- */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 900px;
+      background: #121226;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 30px #00ffff66;
+    }
+    thead {
+      background: #0ff;
+      color: #0e0f19;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    th, td {
+      padding: 0.8rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #00ffff44;
+      font-feature-settings: "tnum";
+      font-variant-numeric: tabular-nums;
+    }
+    tbody tr:hover {
+      background: #00ffff22;
+    }
+    /* --- PAGINATION --- */
+    #pagination {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    #pagination button {
+      background: transparent;
+      border: 2px solid #7fffd4;
+      color: #7fffd4;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    #pagination button:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+    #pagination button:hover:not(:disabled) {
+      background: #7fffd4;
+      color: #0e0f19;
+      box-shadow: 0 0 15px #7fffd4dd;
+    }
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bienvenue sur Hyperspace Xero</h1>
+
+  <nav>
+    <a href="dashboard.html">📊 Dashboard Xero</a>
+    <a href="auth0.html">🔐 Connexion Auth0</a>
+    <a href="gpt.html">💬 Parler à GPT</a>
+  </nav>
+
+  <div id="searchBar">
+    <input type="text" id="searchInput" placeholder="Chercher par client ou facture..." />
+    <button id="refreshBtn">🔄 Refresh</button>
+  </div>
+
+  <table id="transactionsTable" aria-label="Transactions">
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Facture</th>
+        <th>Montant</th>
+        <th>Devise</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Les transactions seront insérées ici -->
+    </tbody>
+  </table>
+
+  <div id="pagination">
+    <button id="prevPage" disabled>Précédent</button>
+    <span id="pageInfo">Page 1</span>
+    <button id="nextPage" disabled>Suivant</button>
+  </div>
+
+  <footer>
+    &copy; 2025 Hyperspace Xero - Tous droits réservés
+  </footer>
+
+<script>
+  // MOCK transactions data
+  const transactions = [
+    { client_name: "Dupont SARL", id: "INV-1001", amount: 1500, currency: "CHF", status: "Paid", timestamp: "2025-07-01" },
+    { client_name: "Martin & Co", id: "INV-1002", amount: 2300, currency: "EUR", status: "Pending", timestamp: "2025-07-03" },
+    { client_name: "La Maison", id: "INV-1003", amount: 1200, currency: "USD", status: "Paid", timestamp: "2025-07-05" },
+    { client_name: "Société Alpha", id: "INV-1004", amount: 3100, currency: "CHF", status: "Overdue", timestamp: "2025-07-06" },
+    { client_name: "Beta Traders", id: "INV-1005", amount: 800, currency: "EUR", status: "Paid", timestamp: "2025-07-08" },
+    { client_name: "Gamma Services", id: "INV-1006", amount: 1750, currency: "CHF", status: "Pending", timestamp: "2025-07-10" },
+    { client_name: "Delta Solutions", id: "INV-1007", amount: 900, currency: "USD", status: "Paid", timestamp: "2025-07-11" },
+    { client_name: "Omega Corp", id: "INV-1008", amount: 1400, currency: "CHF", status: "Paid", timestamp: "2025-07-12" },
+    { client_name: "Epsilon Ltd.", id: "INV-1009", amount: 2100, currency: "EUR", status: "Pending", timestamp: "2025-07-13" },
+    { client_name: "Zeta Inc.", id: "INV-1010", amount: 1950, currency: "USD", status: "Overdue", timestamp: "2025-07-14" }
+  ];
+
+  let filtered = [...transactions];
+  let currentPage = 1;
+  const itemsPerPage = 5;
+
+  const tbody = document.querySelector("#transactionsTable tbody");
+  const searchInput = document.getElementById("searchInput");
+  const refreshBtn = document.getElementById("refreshBtn");
+  const prevPageBtn = document.getElementById("prevPage");
+  const nextPageBtn = document.getElementById("nextPage");
+  const pageInfo = document.getElementById("pageInfo");
+
+  function renderTable() {
+    tbody.innerHTML =
