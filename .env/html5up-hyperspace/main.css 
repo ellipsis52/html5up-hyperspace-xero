@@ -1,0 +1,52 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0b0f1a;
+    color: #e0e6f1;
+    margin: 0; padding: 0;
+}
+header {
+    background: #1a1f36;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.logo {
+    height: 50px;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+nav ul li a, .back-link {
+    color: #89c4f4;
+    text-decoration: none;
+    font-weight: 600;
+}
+nav ul li a:hover, .back-link:hover {
+    text-decoration: underline;
+}
+main {
+    padding: 2rem;
+}
+.transactions {
+    display: grid;
+    gap: 1.5rem;
+}
+.transaction {
+    background: #18204e;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 0 8px #223366;
+}
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #1a1f36;
+    font-size: 0.9rem;
+    color: #8899bb;
+}

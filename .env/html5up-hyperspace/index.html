@@ -330,8 +330,208 @@ clientId: "qnLTr3RJKM9gHOFbhbUKmtkinOwKEfc4"
 					<div class="col-12">
 						<h1><a href="/" id="logo">Hyperspace Xero Partner 2.0</a></h1>
 						<nav id="nav">
-							<ul>
-								<li><a href="#wrapper">Home</a></li>
-								<li><a href="#about-section">About</a></li>
-								<li#><a href="#services-section">Services</a></li# File: index.html
+							<ul>import zipfile
+
+# Define the HTML files and assets content again, with proper linking and a simple navigation header
+files = {
+    "hyperspace-html5-connected/index.html": """
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hyperspace Xero - Accueil</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+    <header>
+        <img src="images/logo.svg" alt="Hyperspace Logo" class="logo"/>
+        <h1>Bienvenue sur Hyperspace Xero</h1>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">📊 Accéder au Dashboard Xero</a></li>
+                <li><a href="auth0.html">🔐 Connexion Auth0</a></li>
+                <li><a href="gpt.html">💬 Parler à GPT</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <p>Explorez la puissance de la finance connectée au bout des doigts.</p>
+    </main>
+    <footer>
+        <p>© 2025 Hyperspace Xero - Theme by HTML5 UP</p>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+""",
+    "hyperspace-html5-connected/dashboard.html": """
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Xero</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-link">← Retour à l'accueil</a>
+        <h2>Transactions Xero (mockées)</h2>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="auth0.html">Connexion Auth0</a></li>
+                <li><a href="gpt.html">Parler à GPT</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="transactions">
+            <article class="transaction">
+                <h3>Client: ACME Corp</h3>
+                <p>Invoice ID: INV-00123</p>
+                <p>Amount: 1,200 USD</p>
+                <p>Status: Paid</p>
+                <p>Date: 2025-07-14</p>
+            </article>
+            <article class="transaction">
+                <h3>Client: Beta Ltd</h3>
+                <p>Invoice ID: INV-00124</p>
+                <p>Amount: 950 USD</p>
+                <p>Status: Pending</p>
+                <p>Date: 2025-07-13</p>
+            </article>
+            <article class="transaction">
+                <h3>Client: Gamma Inc</h3>
+                <p>Invoice ID: INV-00125</p>
+                <p>Amount: 2,350 USD</p>
+                <p>Status: Overdue</p>
+                <p>Date: 2025-07-10</p>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Hyperspace Xero - Theme by HTML5 UP</p>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+""",
+    "hyperspace-html5-connected/auth0.html": """
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Connexion Auth0</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-link">← Retour à l'accueil</a>
+        <h2>Connexion Auth0 (Mock)</h2>
+    </header>
+    <main>
+        <p>Cette page sera connectée à Auth0 pour gérer l’authentification.</p>
+    </main>
+    <footer>
+        <p>© 2025 Hyperspace Xero - Theme by HTML5 UP</p>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+""",
+    "hyperspace-html5-connected/gpt.html": """
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Parler à GPT</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-link">← Retour à l'accueil</a>
+        <h2>Parler à GPT (Mock)</h2>
+    </header>
+    <main>
+        <p>Cette page permettra d’interagir avec GPT via ton backend.</p>
+    </main>
+    <footer>
+        <p>© 2025 Hyperspace Xero - Theme by HTML5 UP</p>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+""",
+    "hyperspace-html5-connected/assets/css/main.css": """
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0b0f1a;
+    color: #e0e6f1;
+    margin: 0; padding: 0;
+}
+header {
+    background: #1a1f36;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.logo {
+    height: 50px;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+nav ul li a, .back-link {
+    color: #89c4f4;
+    text-decoration: none;
+    font-weight: 600;
+}
+nav ul li a:hover, .back-link:hover {
+    text-decoration: underline;
+}
+main {
+    padding: 2rem;
+}
+.transactions {
+    display: grid;
+    gap: 1.5rem;
+}
+.transaction {
+    background: #18204e;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 0 8px #223366;
+}
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #1a1f36;
+    font-size: 0.9rem;
+    color: #8899bb;
+}
+""",
+    "hyperspace-html5-connected/assets/js/main.js": """
+// Simple placeholder JS
+console.log('Hyperspace Xero theme loaded');
+"""
+}
+
+# Path to save ZIP
+zip_file_path = "/mnt/data/hyperspace-html5-connected.zip"
+
+with zipfile.ZipFile(zip_file_path, "w") as zipf:
+    for path, content in files.items():
+        zipf.writestr(path, content.strip())
+
+zip_file_path
 

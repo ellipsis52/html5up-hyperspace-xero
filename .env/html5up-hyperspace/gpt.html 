@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Parler à GPT</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-link">← Retour à l'accueil</a>
+        <h2>Parler à GPT (Mock)</h2>
+    </header>
+    <main>
+        <p>Cette page permettra d’interagir avec GPT via ton backend.</p>
+    </main>
+    <footer>
+        <p>© 2025 Hyperspace Xero - Theme by HTML5 UP</p>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
