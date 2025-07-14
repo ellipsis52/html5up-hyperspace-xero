@@ -1,13 +1,3 @@
 [build]
-  publish = "html5up-hyperspace"
-  command = ""  # Pas de commande de build, site statique simple
-
-[context.production]
-  command = "npm run build" # Commande de build pour le contexte production
-  publish = "public" # Répertoire de publication pour le contexte production
-  functions = "functions" # Répertoire de fonctions pour le contexte production
-  [context.production.environment]
-    NODE_ENV = "production" # Environnement de production pour le contexte production
-    PORT = "3000" # Port de l'application pour le contexte production
-    HOST = "0.0.0.0" # Adresse IP de l'application pour le contexte production
-    # Add any other environment variables you need for your production build here
+publish = "html5up-hyperspace"
+command = ""                   # Pas besoin de build, le site est prêt à l’emploi
