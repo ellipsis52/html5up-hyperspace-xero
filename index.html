@@ -1,21 +1,414 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Hyperspace by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head><!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Accueil Netmanagement</title>
-  <link rel="stylesheet" href="assets/css/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hyperspace Xero Partner 2.0 - Sign Up | Netmanagement.online</title>
+  <style>
+    body {
+      background-color: #f5f7fa;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    #signup-container {
+      max-width: 420px;
+      width: 90%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      padding: 2.5rem 3rem;
+      text-align: center;
+    }
+    #signup-container img {
+      width: 160px;
+      margin-bottom: 2rem;
+    }
+    #signup-container h2 {
+      margin-bottom: 1.5rem;
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+    form label {
+      display: block;
+      text-align: left;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="password"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #f9f9f9;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form input[type="password"]:focus {
+      border-color: #8080ff;
+      background: #fff;
+      outline: none;
+    }
+    #signup-button {
+      width: 100%;
+      background-color: #8080ff;
+      color: white;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #signup-button:hover {
+      background-color: #6666cc;
+    }
+    .message {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #e74c3c; /* rouge d'alerte */
+    }
+    .success {
+      color: #27ae60; /* vert succès */
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenue sur Hyperspace Xero</h1>
-  <nav>
-    <ul>
-      <li><a href="dashboard.html">📊 Accéder au Dashboard Xero</a></li>
-      <li><a href="#" onclick="auth0Login()">🔐 Connexion Auth0</a></li>
-      <li><a href="#" onclick="askGPT()">💬 Parler à GPT</a></li>
-    </ul>
-  </nav>
-  <section id="gpt-response"></section>
-  <script src="assets/js/connect.js"></script>
+  <div id="signup-container">
+    <img src="https://netmanagement.online/wp-content/uploads/2024/10/xero-partner-badge-RGB.png" alt="Xero Partner Badge" />
+    <h2>Join our constellation</h2>
+    <form id="signup-form" novalidate>
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Your full name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Create a password" required minlength="8" />
+
+      <label for="confirm-password">Confirm Password</label>
+      <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required minlength="8" />
+
+      <input type="submit" id="signup-button" value="Sign Up" />
+      <p id="form-message" class="message"></p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const messageEl = document.getElementById('form-message');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      messageEl.textContent = '';
+      messageEl.className = 'message';
+
+      const fullname = form.fullname.value.trim();
+      const email = form.email.value.trim();
+      const password = form.password.value;
+      const confirmPassword = form['confirm-password'].value;
+
+      if (!fullname || !email || !password || !confirmPassword) {
+        messageEl.textContent = "Please fill in all fields.";
+        return;
+      }
+      if (password !== confirmPassword) {
+        messageEl.textContent = "Passwords don't match.";
+        return;
+      }
+      if (password.length < 8) {
+        messageEl.textContent = "Password must be at least 8 characters.";
+        return;
+      }
+
+      // --- Simuler l’appel API d’inscription ---
+      try {
+        // Ici, tu pourrais faire un fetch POST vers ton backend d'inscription
+        // Ex : 
+        // const response = await fetch('/api/signup', {...})
+
+        // Simulation réussite :
+        messageEl.textContent = "Registration successful! Redirecting…";
+        messageEl.classList.add('success');
+
+        // Par exemple, rediriger après 2 secondes
+        setTimeout(() => {
+          window.location.href = 'https://netmanagement.online/dashboard/stripe-xero';
+        }, 2000);
+      } catch (error) {
+        messageEl.textContent = "An error occurred, please try again.";
+      }
+    });
+  </script>form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  messageEl.textContent = '';
+  messageEl.className = 'message';
+
+  const fullname = form.fullname.value.trim();
+  const email = form.email.value.trim();
+  const password = form.password.value;
+  const confirmPassword = form['confirm-password'].value;
+
+  if (!fullname || !email || !password || !confirmPassword) {
+    messageEl.textContent = "Please fill in all fields.";
+    return;
+  }
+  if (password !== confirmPassword) {
+    messageEl.textContent = "Passwords don't match.";
+    return;
+  }
+  if (password.length < 8) {
+    messageEl.textContent = "Password must be at least 8 characters.";
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fullname, email, password })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      messageEl.textContent = data.message + " Redirecting…";
+      messageEl.classList.add('success');
+      setTimeout(() => {
+        window.location.href = 'https://netmanagement.online/dashboard/stripe-xero';
+      }, 2000);
+    } else {
+      messageEl.textContent = data.message || "An error occurred.";
+    }
+  } catch (error) {
+    messageEl.textContent = "Server error, please try again.";
+  }
+});
+
 </body>
 </html>
 
+	<body class="is-preload">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#one">Who we are</a></li>
+							<li><a href="#two">What we do</a></li>
+							<li><a href="#three">Get in touch</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Hyperspace</h1>
+							<p>Just another fine responsive site template designed by <a href="http://html5up.net">HTML5 UP</a><br />
+							and released for free under the <a href="http://html5up.net/license">Creative Commons</a>.</p>
+							<ul class="actions">
+								<li><a href="#one" class="button scrolly">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style2 spotlights">
+						<section>
+							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Move to Stripe</h2>
+									<p>When users access our service, Okta handles secure authentication. It ensures every user is verified, with precise control over permissions and access levels. This layer of security means businesses can manage users confidently, whether it’s employees, accountants, or partners.</div>
+										<ul class="actions">
+										<li><a href="generic.html" class="button">Learn more</a></li>
+									</ul>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Get on true</h2>
+									<p>Through our Xero Partner 2.0 integration, we offer full-featured access to Xero’s ecosystem. That includes user role management, billing synchronization, and real-time financial data processing. The ‘point twenty’ framework is central to managing accounts and users efficiently, and it’s been working very smoothly for our partners.</p>
+									<ul class="actions">
+										<li><a href="generic.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>What we do</h2>
+									<p>Then, we bring in GPT-4. This is where intelligence takes over. We use GPT-4 to analyze financial data, assist users in understanding reports, and automate complex workflows. For example, it can summarize cash flow trends, help write financial commentary, or even support decision-making with predictive insights. It’s like having an intelligent assistant built into your financial system.</p>
+									<ul class="actions">
+										<li><a href="generic.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Xero and JAX</h3>
+								<p></h2>
+							<p>Now, when we combine that with JAX—our analytics and visualization engine—it becomes even more powerful. JAX turns raw financial data into clear, interactive dashboards. It makes finance visual, fast, and accessible. GPT-4 then adds context, interpreting the visuals, spotting patterns, and even suggesting next steps. So instead of just seeing a chart, a user might get a helpful insight like: ‘Spending on marketing increased twenty percent this month—consider reviewing campaign performance.</p>
+							<div class="features">
+								<section>
+									<span class="icon solid major fa-code"></span>
+									<h3>Course of objects</h3>
+									<p>Automatic conversion: Services that automatically convert cryptocurrency payments into fiat currency, reducing the risk associated with crypto volatility.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-lock"></span>
+									<h3>Submiting an API</h3>
+									<p>Programming interfaces (APIs) for seamless integration with existing e-commerce systems, simplifying cryptocurrency payment management</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-cog"></span>
+									<h3>The use of our service</h3>
+									<p>together, GPT-4 and JAX give clients more than just data—they give understanding, recommendations, and real business intelligence. It’s not just about managing money—it’s about making smarter moves.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-desktop"></span>
+									<h3>Compliance and Security</h3>
+									<p>Compliance and security: Implementation of advanced security measures and compliance with regulations to protect merchants and their customers.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-link"></span>
+									<h3>payd with stripe</h3>
+									<p>We use Stripe to process payments, ensuring secure transactions and compliance with payment processing regulations.</p>
+								</section>
+								<section>
+									<span class="icon major fa-gem"></span>
+									<h3>payd with xero</h3>
+									<p>We use Xero to manage our finances, providing a comprehensive accounting solution for small businesses.</p>
+								</section>
+							</div>
+							<ul class="actions">
+								<li><a href="generic.html" class="button">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Get in touch</h2>
+							<p>We'd love to hear from you. Please don't hesitate to contact us at:</p>
+							<div class="split style1">
+								<section>
+									<form method="post" action="#">
+										<div class="fields">
+											<div class="field half">
+												<label for="name">Name</label>
+												<input type="text" name="name" id="name" />
+											</div>
+											<div class="field half">
+												<label for="email">Email</label>
+												<input type="text" name="email" id="email" />
+											</div>
+											<div class="field">
+												<label for="message">Message</label>
+												<textarea name="message" id="message" rows="5"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><a href="" class="button submit">Send Message</a></li>
+										</ul>
+									</form>
+								</section>
+								<section>
+									<ul class="contact">
+										<li>
+											<h3>Address</h3>
+											<span>12345 Somewhere Road #654<br />
+											Nashville, TN 00000-0000<br />
+											USA</span>
+										</li>
+										<li>
+											<h3>Email</h3>
+											<a href="#">user@untitled.tld</a>
+										</li>
+										<li>
+											<h3>Phone</h3>
+											<span>(000) 000-0000</span>
+										</li>
+										<li>
+											<h3>Social</h3>
+											<ul class="icons">
+												<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+												<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+												<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+												<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+												<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+											</ul>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; netmanagement.onlline. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
