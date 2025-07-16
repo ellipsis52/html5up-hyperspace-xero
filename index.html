@@ -1,163 +1,210 @@
-from zipfile import ZipFile
-from pathlib import Path
+<!DOCTYPE >
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Hyperspace by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
-# Dossier temporaire
-output_dir = Path("/mnt/data/netmanagement_form")
-output_dir.mkdir(parents=True, exist_ok=True)
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Welcome</a></li>
+							<li><a href="#one">Who we are</a></li>
+							<li><a href="#two">What we do</a></li>
+							<li><a href="#three">Get in touch</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
 
-# Contenu du fichier index.html avec le design demandé
-index_html_content = """<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulaire Netmanagement</title>
-  <style>
-    body {
-      background-color: #fff;
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      background-color: white;
-      border: 1px solid #000;
-      padding: 2rem;
-      border-radius: 8px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .container img {
-      width: 150px;
-      margin-bottom: 1rem;
-    }
-    h2 {
-      margin-bottom: 1.5rem;
-      color: #333;
-    }
-    label {
-      display: block;
-      text-align: left;
-      margin: 0.5rem 0 0.25rem;
-      font-weight: 600;
-    }
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 0.5rem;
-      margin-bottom: 1rem;
-      border: 1px solid #000;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #8080ff;
-      color: white;
-      border: 1px solid black;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    button:hover {
-      background-color: #6666ff;
-    }
-    .message {
-      margin-top: 1rem;
-      font-weight: 600;
-    }
-    .success {
-      color: green;
-    }
-    .error {
-      color: red;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <img src="https://netmanagement.online/wp-content/uploads/2024/10/xero-partner-badge-RGB.png" alt="Xero Partner Badge" />
-    <h2>Créer un compte</h2>
-    <form id="signup-form">
-      <label for="fullname">Nom complet</label>
-      <input type="text" name="fullname" id="fullname" required />
-      <label for="email">Adresse e-mail</label>
-      <input type="email" name="email" id="email" required />
-      <label for="password">Mot de passe</label>
-      <input type="password" name="password" id="password" required />
-      <label for="confirm-password">Confirmer mot de passe</label>
-      <input type="password" name="confirm-password" id="confirm-password" required />
-      <button type="submit">Créer un compte</button>
-    </form>
-    <div id="message" class="message"></div>
-  </div>
-  <script>
-    const form = document.getElementById('signup-form');
-    const messageEl = document.getElementById('message');
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      messageEl.textContent = '';
-      messageEl.className = 'message';
-      const fullname = form.fullname.value.trim();
-      const email = form.email.value.trim();
-      const password = form.password.value;
-      const confirmPassword = form['confirm-password'].value;
-      if (!fullname || !email || !password || !confirmPassword) {
-        messageEl.textContent = "Veuillez remplir tous les champs.";
-        messageEl.classList.add("error");
-        return;
-      }
-      if (password !== confirmPassword) {
-        messageEl.textContent = "Les mots de passe ne correspondent pas.";
-        messageEl.classList.add("error");
-        return;
-      }
-      if (password.length < 8) {
-        messageEl.textContent = "Le mot de passe doit contenir au moins 8 caractères.";
-        messageEl.classList.add("error");
-        return;
-      }
-      try {
-        const response = await fetch('/api/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fullname, email, password })
-        });
-        const data = await response.json();
-        if (data.success) {
-          messageEl.textContent = data.message + " Redirection en cours...";
-          messageEl.classList.add("success");
-          setTimeout(() => {
-            window.location.href = 'https://netmanagement.online/dashboard/stripe-xero';
-          }, 2000);
-        } else {
-          messageEl.textContent = data.message || "Une erreur est survenue.";
-          messageEl.classList.add("error");
-        }
-      } catch (error) {
-        messageEl.textContent = "Erreur serveur. Veuillez réessayer.";
-        messageEl.classList.add("error");
-      }
-    });
-  </script>
-</body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Hyperspace</h1>
+							<p>Just another fine responsive site template designed by <a href="http://html5up.net">HTML5 UP</a><br />
+							and released for free under the <a href="http://html5up.net/license">Creative Commons</a>.</p>
+							<ul class="actions">
+								<li><a href="#one" class="button scrolly">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style2 spotlights">
+						<section>
+							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Move to Stripe</h2>
+									<p>When users access our service, Okta handles secure authentication. It ensures every user is verified, with precise control over permissions and access levels. This layer of security means businesses can manage users confidently, whether it’s employees, accountants, or partners.</p>
+									<ul class="actions">
+										<li><a href="generic.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Get on true</h2>
+									<p>Through our Xero Partner 2.0 integration, we offer full-featured access to Xero’s ecosystem. That includes user role management, billing synchronization, and real-time financial data processing. The ‘point twenty’ framework is central to managing accounts and users efficiently, and it’s been working very smoothly for our partners.</p>
+									<ul class="actions">
+										<li><a href="generic.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Pay with stripe</h2>
+									<p>Were you want to pay with stripe for your business or your business partner? we can help you to pay with stripe.</p>
+									<ul class="actions">
+										<li><a href="generic.html" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>What we do</h2>
+							<p>Then, we bring in GPT-4. This is where intelligence takes over. We use GPT-4 to analyze financial data, assist users in understanding reports, and automate complex workflows. For example, it can summarize cash flow trends, help write financial commentary, or even support decision-making with predictive insights. It’s like having an intelligent assistant built into your financial system.</p>
+							<div class="features">
+								<section>
+									<span class="icon solid major fa-code"></span>
+									<h3>How our algorithm works</h3>
+									<p>GPT-4 helps users understand and act on their financial data naturally and clearly.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-lock"></span>
+									<h3>Xero and JAX</h3>
+									<p>JAX visualizes, GPT-4 contextualizes. Together they offer a dashboard with insight and prediction.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-cog"></span>
+									<h3>Course of objective</h3>
+									<p>Automatic conversion of crypto into fiat reduces volatility risks.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-desktop"></span>
+									<h3>Submitting an API</h3>
+									<p>APIs for seamless integration into e-commerce, easing crypto management.</p>
+								</section>
+								<section>
+									<span class="icon solid major fa-link"></span>
+									<h3>The use of our service</h3>
+									<p>Together, GPT-4 and JAX deliver not just data, but intelligence and actionability.</p>
+								</section>
+								<section>
+									<span class="icon major fa-gem"></span>
+									<h3>Compliance and Security</h3>
+									<p>Advanced security measures and full compliance to protect merchants and clients alike.</p>
+								</section>
+							</div>
+							<ul class="actions">
+								<li><a href="generic.html" class="button">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Get in touch</h2>
+							<p>Cryptocurrency payment gateways: enabling merchants to accept payments in various cryptocurrencies.</p>
+
+							<div class="split style1">
+								<section>
+									<form method="post" action="#">
+										<div class="fields">
+											<div class="field half">
+												<label for="name">Name</label>
+												<input type="text" name="name" id="name" />
+											</div>
+											<div class="field half">
+												<label for="email">Email</label>
+												<input type="text" name="email" id="email" />
+											</div>
+											<div class="field">
+												<label for="message">Message</label>
+												<textarea name="message" id="message" rows="5"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><a href="" class="button submit">Send Message</a></li>
+										</ul>
+									</form>
+								</section>
+								<section>
+									<ul class="contact">
+										<li>
+											<h3>Address</h3>
+											<span>33 les bolles du temples<br />
+											2117 la cote aux fees <br />
+											switzerland</span>
+										</li>
+										<li>
+											<h3>Email</h3>
+											<a href="#">info@netmanagement.online</a>
+										</li>
+										<li>
+											<h3>Phone</h3>
+											<span>+1(770) 800 8448</span>
+										</li>
+										<li>
+											<h3>Social</h3>
+											<ul class="icons">
+												<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+												<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+												<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+												<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+												<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+											</ul>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; netmanagement.online copyright 2025. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
-"""
-
-# Écriture du fichier index.html
-index_file = output_dir / "index.html"
-index_file.write_text(index_html_content, encoding="utf-8")
-
-# Création de l'archive zip
-zip_path = "/mnt/data/netmanagement_form.zip"
-with ZipFile(zip_path, 'w') as zipf:
-    zipf.write(index_file, arcname="index.html")
-
-zip_path
