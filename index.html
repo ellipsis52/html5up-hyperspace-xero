@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+from zipfile import ZipFile
+from pathlib import Path
+
+# Dossier temporaire
+output_dir = Path("/mnt/data/netmanagement_form")
+output_dir.mkdir(parents=True, exist_ok=True)
+
+# Contenu du fichier index.html avec le design demandé
+index_html_content = """<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -15,7 +23,6 @@
       align-items: center;
       height: 100vh;
     }
-
     .container {
       background-color: white;
       border: 1px solid #000;
@@ -26,24 +33,20 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       text-align: center;
     }
-
     .container img {
       width: 150px;
       margin-bottom: 1rem;
     }
-
     h2 {
       margin-bottom: 1.5rem;
       color: #333;
     }
-
     label {
       display: block;
       text-align: left;
       margin: 0.5rem 0 0.25rem;
       font-weight: 600;
     }
-
     input[type="text"],
     input[type="email"],
     input[type="password"] {
@@ -54,7 +57,6 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
-
     button {
       background-color: #8080ff;
       color: white;
@@ -64,20 +66,16 @@
       cursor: pointer;
       font-size: 1rem;
     }
-
     button:hover {
       background-color: #6666ff;
     }
-
     .message {
       margin-top: 1rem;
       font-weight: 600;
     }
-
     .success {
       color: green;
     }
-
     .error {
       color: red;
     }
@@ -90,62 +88,49 @@
     <form id="signup-form">
       <label for="fullname">Nom complet</label>
       <input type="text" name="fullname" id="fullname" required />
-
       <label for="email">Adresse e-mail</label>
       <input type="email" name="email" id="email" required />
-
       <label for="password">Mot de passe</label>
       <input type="password" name="password" id="password" required />
-
       <label for="confirm-password">Confirmer mot de passe</label>
       <input type="password" name="confirm-password" id="confirm-password" required />
-
       <button type="submit">Créer un compte</button>
     </form>
     <div id="message" class="message"></div>
   </div>
-
   <script>
     const form = document.getElementById('signup-form');
     const messageEl = document.getElementById('message');
-
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       messageEl.textContent = '';
       messageEl.className = 'message';
-
       const fullname = form.fullname.value.trim();
       const email = form.email.value.trim();
       const password = form.password.value;
       const confirmPassword = form['confirm-password'].value;
-
       if (!fullname || !email || !password || !confirmPassword) {
         messageEl.textContent = "Veuillez remplir tous les champs.";
         messageEl.classList.add("error");
         return;
       }
-
       if (password !== confirmPassword) {
         messageEl.textContent = "Les mots de passe ne correspondent pas.";
         messageEl.classList.add("error");
         return;
       }
-
       if (password.length < 8) {
         messageEl.textContent = "Le mot de passe doit contenir au moins 8 caractères.";
         messageEl.classList.add("error");
         return;
       }
-
       try {
         const response = await fetch('/api/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ fullname, email, password })
         });
-
         const data = await response.json();
-
         if (data.success) {
           messageEl.textContent = data.message + " Redirection en cours...";
           messageEl.classList.add("success");
@@ -164,3 +149,15 @@
   </script>
 </body>
 </html>
+"""
+
+# Écriture du fichier index.html
+index_file = output_dir / "index.html"
+index_file.write_text(index_html_content, encoding="utf-8")
+
+# Création de l'archive zip
+zip_path = "/mnt/data/netmanagement_form.zip"
+with ZipFile(zip_path, 'w') as zipf:
+    zipf.write(index_file, arcname="index.html")
+
+zip_path
