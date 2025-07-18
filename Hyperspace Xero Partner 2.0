@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hyperspace Xero Partner 2.0 Netmanagement.online</title>
+  <style>
+    body {
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    #login-container {
+      max-width: 420px;
+      width: 90%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 2.5rem 3rem;
+      text-align: center;
+    }
+    #login-container img {
+      width: 160px;
+      margin-bottom: 2rem;
+    }
+    #login-container h2 {
+      margin-bottom: 1.5rem;
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+    #login-form label {
+      display: block;
+      text-align: left;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+    #login-form input[type="text"],
+    #login-form input[type="password"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #f9f9f9;
+    }
+    #login-form input[type="text"]:focus,
+    #login-form input[type="password"]:focus {
+      border-color: #8080ff;
+      background: #fff;
+      outline: none;
+    }
+    #login-button {
+      width: 100%;
+      background-color: #8080ff;
+      color: white;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #login-button:hover {
+      background-color: #6666cc;
+    }
+    .divider {
+      margin: 1.5rem 0;
+      position: relative;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #ccc;
+    }
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+    .divider span {
+      color: #999;
+      font-size: 0.9rem;
+      background: white;
+      padding: 0 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .button.primary {
+      display: inline-block;
+      background-color: #8080ff;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+      cursor: pointer;
+      user-select: none;
+    }
+    .button.primary:hover {
+      background-color: #6666cc;
+    }
+  </style>
+</head>
+<body>
+  <div id="login-container">
+    <img src="https://netmanagement.online/wp-content/uploads/2024/10/xero-partner-badge-RGB.png" alt="Xero Partner Badge" />
+    <h2>Welcome back</h2>
+    <form id="login-form" onsubmit="alert('Submit button pressed — intégrer logique ici'); return false;">
+      <label for="username">Email</label>
+      <input type="text" name="username" id="username" placeholder="you@example.com" required />
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" placeholder="Your password" required />
+      <input type="submit" value="Log In" id="login-button" />
+    </form>
+    <div class="divider"><span>or</span></div>
+    <a class="button primary" href="/signup.html">Sign Up</a>
+  </div>
+</body>
+</html>
