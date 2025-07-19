@@ -3,6 +3,31 @@
 A modern and elegant interface that blends the power of **Auth0 authentication**, **Xero Partner 2.0 API**, and **Stripe payments**, wrapped in the sleek design of the [HTML5 UP Hyperspace theme](https://html5up.net/hyperspace).
 
 > “In the vastness of hyperspace, your finances remain secure, streamlined, and beautiful.”
+# ✨ Hyperspace – Custom Integration Guide
+
+Welcome to the **Hyperspace** universe,  
+a constellation of HTML files where imagination weaves the digital fabric.
+
+This project is based on the **HTML5UP Hyperspace** template,  
+but here, each page, each fragment, each `index.html` is a star in its own right.  
+Your task is to make them shine **together**.
+
+---
+
+## 🌌 Purpose
+
+The main file `index.html` located in the `hyperspace/` folder is your **starting point**.  
+However, it is **incomplete** without the other custom pages.  
+Your mission is to **complete it** by merging the content of the other `index.html` files  
+(from your variations, sections, or subpages), according to your custom layout.
+
+---
+
+## 🛠️ Steps to Merge
+
+1. **Open** the main file:
+   ```bash
+   hyperspace/index.html
 
 ---
 
