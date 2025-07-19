@@ -4,11 +4,6 @@ A modern and elegant interface that blends the power of **Auth0 authentication**
 
 > “In the vastness of hyperspace, your finances remain secure, streamlined, and beautiful.”
 # ✨ Hyperspace – Custom Integration Guide
-
-Absolutely! Here is the translated `README.md` in English, preserving the poetic and lyrical tone while staying informative and developer-friendly:
-
----
-
 ````markdown
 # ✨ Hyperspace – Custom Integration Guide
 
