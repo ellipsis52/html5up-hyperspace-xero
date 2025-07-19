@@ -5,6 +5,13 @@ A modern and elegant interface that blends the power of **Auth0 authentication**
 > “In the vastness of hyperspace, your finances remain secure, streamlined, and beautiful.”
 # ✨ Hyperspace – Custom Integration Guide
 
+Absolutely! Here is the translated `README.md` in English, preserving the poetic and lyrical tone while staying informative and developer-friendly:
+
+---
+
+````markdown
+# ✨ Hyperspace – Custom Integration Guide
+
 Welcome to the **Hyperspace** universe,  
 a constellation of HTML files where imagination weaves the digital fabric.
 
@@ -28,6 +35,82 @@ Your mission is to **complete it** by merging the content of the other `index.ht
 1. **Open** the main file:
    ```bash
    hyperspace/index.html
+````
+
+2. **Browse** your other customized folders containing their own `index.html`,
+   for example:
+
+   ```
+   hyperspace/section-about/index.html  
+   hyperspace/section-contact/index.html  
+   hyperspace/section-services/index.html
+   ```
+
+3. **Copy and paste** the relevant sections (such as `<section>`, `<article>`, `<div>`...)
+   into the main `hyperspace/index.html` file,
+   at the appropriate spot within the `<body>`.
+
+4. **Make sure to include** all necessary files:
+
+   * images (`/images/...`)
+   * scripts (`/js/...`)
+   * stylesheets (`/css/...` or inline in `<head>`)
+
+5. **Check all internal links**, anchors (`#id`), and relative paths.
+
+---
+
+## 💡 Structure Tip
+
+It’s often best to structure your subpages as **HTML fragments**
+(rather than full documents with `<html>` and `<head>`)
+so you can inject them more easily into the main page.
+
+---
+
+## 🌠 Example
+
+Here’s a typical inclusion from another section:
+
+```html
+<!-- Contact Section (from section-contact/index.html) -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <form>
+    ...
+  </form>
+</section>
+```
+
+Paste this directly into the main `index.html`, among your other sections.
+
+---
+
+## 🚀 Final Result
+
+A single `index.html` file in `hyperspace/`, **rich and complete**,
+combining all your personalized sections,
+ready for deployment on Vercel, Netlify, or a classic FTP server.
+
+---
+
+## 🧭 Final Tips
+
+* Always keep a **backup** of the original version.
+* Test your final page in multiple browsers.
+* Let your **design speak** – Hyperspace thrives on visual harmony.
+
+---
+
+> May your code shine like a nebula in the infinity of screens.
+> Happy merging, webspace architect.
+
+---
+
+```
+
+Would you like this `README.md` file to be automatically added to your project directory? Or perhaps a shell script to help automate the merging process?
+```
 
 ---
 
